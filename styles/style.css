@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Playpen+Sans:wght@100..800&display=swap');
+
+
+body{
+    font-family: "Kavoon";
+    color: #10439F;
+}
+
+.cabecalho {
+    background-color: #FFD6FF;
+    border: 4px inset #E7C6FF;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+}
+
+.cabecalho-titulo{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.cabecalho-titulo-img{
+    margin-right: 15px;
+    width: 10%;
+}
+
+.cabecalho-navegacao{
+    margin-right: 20px;
+}
+
+.conteudo{
+    display: flex;
+}
+
+.conteudo-principal{
+    width: 70%;
+    background-color: rgba(187, 208, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.conteudo-principal-parte{
+    padding: 10px;
+    width: 70%;
+    margin-left: 20px;
+}
+
+.conteudo-lateral{
+    background-color: rgba(231, 198, 255, 0.5);
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rodape{
+    background-color: #FFD6FF;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    align-items: center;
+    border: 4px outset #E7C6FF;
+}
