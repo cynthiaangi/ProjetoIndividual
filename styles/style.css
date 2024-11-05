@@ -28,7 +28,13 @@ body{
 }
 
 .cabecalho-navegacao{
-    margin-right: 20px;
+    margin-right: 50px;
+    display: flex;
+    gap: 30px;   
+}
+
+.cabecalho-navegacao a{
+    text-decoration: none;
 }
 
 .conteudo{
@@ -37,7 +43,7 @@ body{
 
 .conteudo-principal{
     width: 70%;
-    background-color: rgba(187, 208, 255, 0.5);
+    background-color: rgba(225, 228, 247, 0.473);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +58,7 @@ body{
 }
 
 .conteudo-lateral{
-    background-color: rgba(231, 198, 255, 0.5);
+    background-color: rgba(227, 207, 241, 0.4);
     width: 30%;
     display: flex;
     align-items: center;
@@ -66,4 +72,8 @@ body{
     height: 50px;
     align-items: center;
     border: 4px outset #E7C6FF;
+}
+
+#card-cadastro{
+    display: none;
 }
