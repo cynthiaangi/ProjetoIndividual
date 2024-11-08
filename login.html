@@ -23,23 +23,49 @@
         </nav>
     </header>
     <main class="login">
+        <img src="./img/simbolo.png" alt="Símbolo da conscientização da perda gestacional">
         <section id="card-login">
-            e-mail: <input type="text">
-            senha: <input type="text">
+            <div class="campo">
+                e-mail: <input type="text" placeholder="Digite seu e-mail">
+            </div>
+            <div class="campo">
+                senha: <input type="text" placeholder="Insira a sua senha">
+            </div>
 
-            <button onclick="entrar()">Entrar</button>
-            <button onclick="alterarMain()">Novo Usuário</button>
+            <button class="botoes" onclick="entrar()">Entrar</button>
+            <button class="botoes" onclick="alterarMain()">Novo Usuário</button>
         </section>
         <section id="card-cadastro">
-            Nome: <input id="ipt_nome" type="text">
-            Data de Nascimento: <input id="ipt_nasc" type="text">
-            Gênero: <input id="ipt_gen" type="text">
-            E-mail: <input id="ipt_email" type="text">
-            Senha: <input id="ipt_senha" type="password">
-            Confirmação de senha: <input id="ipt_conf" type="password">
+            <div class="campo">   
+                Nome: <input id="ipt_nome" type="text">
+            </div>
+            <div class="campo">    
+                Data de Nascimento: <input id="ipt_nasc" type="text">
+            </div>
+            <div class="campo">    
+                Gênero: 
+               <select name="genero" id="sel_gen">
+                    <option value="#">Escolha uma opção</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+               </select>
+            </div>
+            <div class="campo">    
+                E-mail: <input id="ipt_email" type="text">
+            </div>
+            <div class="campo">    
+                Telefone: <input id="ipt_tel" type="text">
+            </div>
+            <div class="campo">      
+                Senha: <input id="ipt_senha" type="password">
+            </div>
+            <div class="campo">     
+                Confirmação de senha: <input id="ipt_conf" type="password">
+            </div>
 
-            <button onclick="cadastrar()">Cadastrar</button>
-            <button onclick="voltar()">Voltar</button>
+                <button class="botoes" onclick="cadastrar()">Cadastrar</button>
+                <button class="botoes" onclick="voltar()">Voltar</button>
+
         </section>
     </main>
     <footer class="rodape">
@@ -70,40 +96,86 @@
     function cadastrar(){
         var nome = ipt_nome.value;
         var dtNasc = ipt_nasc.value;
-        var gen = ipt_gen.value;
+        var gen = sel_gen.value;
         var email = ipt_email.value;
         var senha = ipt_senha.value;
         var conf = ipt_conf.value;
+        var tel = ipt_tel.value;
         var arroba = '';
         var pontoCom = email.indexOf('.com');
         var arroba = email.indexOf('@');
         var senhaOk = 0;
         var senhaMaiusc = senha.toUpperCase();
         var senhaMinusc = senha.toLowerCase();
+        var especial = '!@#$%&*';
+        var numero = '1234567890';
 
         if (nome == '' || dtNasc == '' || gen == '#' || email == '' || senha == '' || conf == ''){
             alert('Todos os campos devem ser preenchidos');
-        } else if (nome.length < 3){
-            alert('O nome precisa conter pelo menos 3 letras');
-        } else if(dtNasc.length != 10){
-            alert('A data fornecida não está no formato aceito');
-        } else if(gen != 'feminino'){
-            alert('Infelizmente você não pode se cadastrar em nosso grupo de apoio!');
-        } else if(senha.length < 8){
-            alert('Senha precisa ter pelo menos 8 caracteres');
-        } else if(conf != senha){
-            alert('A confirmação da senha está diferente da senha informada');
-        } else if(pontoCom < arroba || arroba == -1 || pontoCom == -1){
-            alert('Formato de email inválido');
-        }else if(senha == senhaMaiusc || senha == senhaMinusc){
-            alert('Sua senha deve conter pelo menos 1 letra maiúscula e 1 letra minúscula')                    
-        }else {
-            for(var i = 0; i < senha.length; i++){
-                if(Number(senha[i]) != NaN){
-                    senhaOk++;
+        } else{
+            for(var i = 0; i < dtNasc.length; i++){
+                if(i == 2 || i == 5){
+                    if(dtNasc[i] != '/'){
+                        dtNasc = false;
+                        break;
+                    }
+                }
+            } 
+            if(dtNasc.length != 10 || dtNasc == false){
+                alert('Formato de data inválido');
+            } else{
+                for(var j = 0; j < tel.length; j++){
+                    if(j == 0){
+                        if(tel[j] != '('){
+                            tel = false;
+                            break;
+                        }
+                    }
+                    if(j == 3){
+                        if(tel[j] != ')'){
+                            tel = false;
+                            break;
+                        }
+                    }
+                    if(j == 9){
+                        if(tel[j] != '-'){
+                            tel = false;
+                            break;
+                        }
+                    }
+                }
+                if(tel.length != 14 || tel == false){
+                    alert('Número de telefone formato inválido');
+                }else if (nome.length < 3){
+                alert('O nome precisa conter pelo menos 3 letras');
+                } else if(gen != 'feminino'){
+                    alert('Infelizmente você não pode se cadastrar em nosso grupo de apoio!');
+                } else if(pontoCom < arroba || arroba == -1 || pontoCom == -1){
+                    alert('Formato de email inválido');
+                }  else  {
+                    for(var k = 0; k < senha.length; k++){
+                        if(Number(senha[k]) != NaN){
+                            senhaOk++;
+                            break;
+                        }
+                    }
+                    for(var x = 0; x < senha.length; x++){
+                        if(especial.includes(senha[x])){
+                            senhaOk++;
+                            break;
+                        }
+                    }
+                    if(senhaOk != 2 || senha == senhaMaiusc || senha == senhaMinusc || senha.length < 8){
+                        alert('A senha precisa conter pelo menos: \n 1 número \n 1 caractere especial (! @ # $ % & *) \n 1 letra maiúscula \n 1 letra minúscula \n 8 caracteres')
+                    } else if(conf != senha){
+                        alert('A confirmação da senha está diferente da senha informada');
+                    }else{
+                        alert('Cadastro realizado com sucesso, retornando para a tela de login');
+                        voltar();
+                    }
                 }
             }
         }
     }
-    
+        
 </script>
