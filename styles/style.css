@@ -3,7 +3,7 @@
 
 body{
     font-family: "Kavoon";
-    color: #10439F;
+    color: #9e26a2;
     height: 100vh;
 }
 
@@ -38,6 +38,7 @@ body{
 
 .cabecalho-navegacao a{
     text-decoration: none;
+    color: #9e26a2;
 }
 
 .conteudo{
