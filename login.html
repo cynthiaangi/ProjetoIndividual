@@ -59,6 +59,13 @@
             </div>
             <div class="campo">      
                 Senha:* <input id="ipt_senha" type="password" placeholder="Informe uma senha">
+                <div id="valida-senha">
+                    <li>1 Letra Maiúscula</li>
+                    <li>1 Letra Minúscula</li>
+                    <li>1 Número</li>
+                    <li>1 caractere especial ( !@#$%&* )</li>
+                    <li>Mínimo 8 caracteres</li>
+                </div>
             </div>
             <div class="campo">     
                 Confirmação de senha:* <input id="ipt_conf" type="password" placeholder="Informe a senha novamente">
@@ -96,6 +103,13 @@
 
     function cadastrar(){
         div_erro.innerHTML = '';
+        // ipt_conf.clear();
+        // ipt_nome.clear();
+        // ipt_nasc.clear();
+        // ipt_gen.clear();
+        // ipt_email.clear();
+        // ipt_senha.clear();
+        // ipt_tel.clear();
         var nome = ipt_nome.value;
         var dtNasc = ipt_nasc.value;
         var gen = sel_gen.value;
@@ -113,7 +127,7 @@
         var numero = '1234567890';
 
         if (nome == '' || dtNasc == '' || gen == '#' || email == '' || senha == '' || conf == ''){
-            div_erro.innerHTML = `<p style="color: #ff0000;">Todos os campos com (*) devem estar preenchidos!</p><p style="color: #ff0000;">Tente novamente.</p>`;
+            div_erro.innerHTML = `<p>Todos os campos com (*) devem estar preenchidos!</p><p>Tente novamente.</p>`;
         } else{
             for(var i = 0; i < dtNasc.length; i++){
                 if(i == 2 || i == 5){
@@ -124,7 +138,7 @@
                 }
             } 
             if(dtNasc.length != 10 || dtNasc == false){
-                div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
+                div_erro.innerHTML = `<p>Formato de data inválido!</p><p>Tente novamente.</p>`;
             } else{
                 for(var j = 0; j < tel.length; j++){
                     if(j == 0){
@@ -147,17 +161,13 @@
                     }
                 }
                 if(tel.length != 14 || tel == false){
-                    div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                    alert('Número de telefone formato inválido');
+                    div_erro.innerHTML = `<p>Número de telefone formato inválido!</p><p>Tente novamente.</p>`;
                 }else if (nome.length < 3){
-                    div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                alert('O nome precisa conter pelo menos 3 letras');
+                    div_erro.innerHTML = `<p>O nome precisa conter pelo menos 3 letras!</p><p>Tente novamente.</p>`;
                 } else if(gen != 'feminino'){
-                    div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                    alert('Infelizmente você não pode se cadastrar em nosso grupo de apoio!');
+                    div_erro.innerHTML = `<p>Infelizmente você não pode se cadastrar em nosso grupo de apoio.</p><p>Agradecemos o interesse!</p>`;
                 } else if(pontoCom < arroba || arroba == -1 || pontoCom == -1){
-                    div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                    alert('Formato de email inválido');
+                    div_erro.innerHTML = `<p>Formato de email inválido!</p><p>Tente novamente.</p>`;
                 }  else  {
                     for(var k = 0; k < senha.length; k++){
                         if(Number(senha[k]) != NaN){
@@ -172,11 +182,9 @@
                         }
                     }
                     if(senhaOk != 2 || senha == senhaMaiusc || senha == senhaMinusc || senha.length < 8){
-                        div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                        alert('A senha precisa conter pelo menos: \n 1 número \n 1 caractere especial (! @ # $ % & *) \n 1 letra maiúscula \n 1 letra minúscula \n 8 caracteres')
+                        div_erro.innerHTML = `<p>A senha precisa conter todos os itens listados abaixo do campo!</p><p>Tente novamente.</p>`;
                     } else if(conf != senha){
-                        div_erro.innerHTML = `<p style="color: #ff0000;">Formato de data inválido!</p><p style="color: #ff0000;">Tente novamente.</p>`;
-                        alert('A confirmação da senha está diferente da senha informada');
+                        div_erro.innerHTML = `<p>A confirmação da senha está diferente da senha informada!</p><p>Tente novamente.</p>`;
                     }else{
                         alert('Cadastro realizado com sucesso, retornando para a tela de login');
                         voltar();
