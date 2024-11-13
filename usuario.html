@@ -41,7 +41,37 @@
         <section class="historia">
             Conte sua história:
             <div class="conteudo-curiosidade">
-                Você Sabia?
+                <div class="campo">
+                    Data do aborto:
+                    <input type="text" id="ipt_data">
+                </div>
+                <div class="campo">
+                    Tempo de gestação:
+                    <input type="number" id="ipt_tempo"><span>semanas</span>
+                </div>
+                <div class="campo">
+                    Motivo:
+                    <select name="motivo" id="sel_motivo">
+                        <option value="#">Escolha uma opção</option>
+                        <option value="nao">Sem motivo determinado</option>
+                        <option value="sim">Outro</option>
+                    </select>
+                    Qual:
+                    <input id="input_motivo"></input>
+                </div>
+                <div class="campo">
+                    Descrição:
+                    <input type="text" id="ipt_hist">
+                </div>
+                <div class="campo">
+                    Autoriza a publicação da sua história na página para todos os usuários?
+                    <select name="atorizacao" id="sel_aut">
+                        <option value="#">Escolha uma opção</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+                <button onclick="enviar()">Enviar</button>
             </div>
         </section>
 

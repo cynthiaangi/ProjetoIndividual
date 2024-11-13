@@ -23,13 +23,13 @@
         </nav>
     </header>
     <main class="login">
-        <img src="./img/simbolo.png" alt="Símbolo da conscientização da perda gestacional">
+        <img src="./img/simbolo_colorido.png" alt="Símbolo da conscientização da perda gestacional">
         <section id="card-login">
             <div class="campo">
-                e-mail: <input type="text" placeholder="Digite seu e-mail">
+                e-mail: <input id="ipt_email_login" type="text" placeholder="Digite seu e-mail">
             </div>
             <div class="campo">
-                senha: <input type="text" placeholder="Insira a sua senha">
+                senha: <input id="ipt_senha_login" type="text" placeholder="Insira a sua senha">
             </div>
 
             <button class="botoes" onclick="entrar()">Entrar</button>
@@ -99,6 +99,18 @@
 
         login.style.display = 'flex';
         cadastro.style.display = 'none';
+    }
+
+    function entrar(){
+        var email = ipt_email_login.value;
+        var senha = ipt_senha_login.value;
+
+        if(senha == senha_cadastro && email == email_cadastro){
+            alert('Bem vindo');
+            
+        } else{
+            alert('Usuario ou senha incorretos!')
+        }
     }
 
     function cadastrar(){
