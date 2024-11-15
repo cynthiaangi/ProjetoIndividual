@@ -11,6 +11,7 @@
     
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="stylesheet" href="../../styles/style-usuario.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -27,53 +28,91 @@
 </head>
 
 <!-- <body onload=" atualizarFeed()"> -->
-
 <body>
+    
+<!-- <body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()"> -->
 
-    <div class="janela">
-        <div class="header-left">
-            <h1>AquaTech</h1>
+    
+            <header class="cabecalho">
+                <div class="cabecalho-titulo">
+                    <img class="cabecalho-titulo-img" src="../../img/logo.png" alt="Logo site">
+                    <h1>
+                        Voz do amor
+                    </h1>
+                </div>
+                <nav class="cabecalho-navegacao">
+                    <a href="./index.html">Sair</a>
+                    <a href="./public/dashboard/dashboard.html">Dados</a>
+                    <a href="./login.html">Grupo de Apoio</a>
+                </nav>
+            </header>
+    
+            <div class="dash">
+                <div id="alerta">
+                </div>
+                <div class="area-parametros-alerta">
+                    <p class="titulo-legenda">
+                        Legenda - Parâmetros para Alertas
+                    </p>
+                    <div class="parametros-alerta">
+                        <div class="item-regua perigo-frio">
+                            <p>Perigo</p>
+                            <p>&lt;=5°C</p>
+                        </div>
+                        <div class="item-regua alerta-frio">
+                            <p>Alerta</p>
+                            <p>&lt;=10°C</p>
+                        </div>
+                        <div class="item-regua ideal">
+                            <p>Ideal</p>
+                            <p>20°C</p>
+                        </div>
+                        <div class="item-regua alerta-quente">
+                            <p>Alerta</p>
+                            <p>&gt;=22°C</p>
+                        </div>
+                        <div class="item-regua perigo-quente">
+                            <p>Perigo</p>
+                            <p>&gt;=23°C</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="cards" id="cardAquarios">
+    
+                </div>
+    
+            </div>>
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-                <h3>Cpf: <span id="cpf_usuario"></span>!</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
 
         <div class="dash">
             <div id="alerta">
             </div>
 
             <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+                <div id="grafico" class="display-none">
+                    <h3 class="tituloGraficos">
+                        <span id="tituloAquario">Comparando dados</span>
+                    </h3>
+                    <p>Comparando a vida real com dados científicos</p>
+                    <div class="graph">
+                        <canvas id="myChartCanvas"></canvas>
+                    </div>
+                    <div class="label-captura">
+                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                    </div>
+                </div>
             </div>
             <div id="graficos">
             </div>
         </div>
-    </div>
+
+    </main>
+    <footer class="rodape">
+        <h4>
+            Desenvolvido por Cynthia Angi
+        </h4>
+    </footer>
 
 
 </body>
@@ -86,6 +125,24 @@
     let proximaAtualizacao;
 
     window.onload = exibirAquariosDoUsuario();
+
+    function exibirAquarios() {
+        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+            document.getElementById("cardAquarios").innerHTML += `
+                    <div class="card-aquario">
+                        <div class="title-aquario">
+                            <h1>${item.descricao}</h1>
+                        </div>
+                        <div class="desc-aquario">
+                        <div class="temperatura">
+                            <p id="temp_aquario_${item.id}">-°C</p>
+                        </div>
+                        <div class="cor-alerta" id="card_${item.id}"></div>
+                    </div>
+                    </div>
+                    `
+        });
+    }
 
     function exibirAquariosDoUsuario() {
         var aquarios = JSON.parse(sessionStorage.AQUARIOS);

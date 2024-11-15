@@ -95,7 +95,7 @@ body {
 }
 
 .div-results .feed-container {
-  background-color: #212124;
+  /* background-color: #212124; */
   border-radius: 5px;
   margin-bottom: 80px;
 }
@@ -111,16 +111,16 @@ body {
 
 /* pagina graficos */
 
-.dash-header {
-  background-color: #212124;
-}
+/* .dash-header {
+ background-color: #212124;
+} */
 
 .dash {
   width: 80%;
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #161618;
+  /* background-color: #161618; */
   height: 100vh;
   overflow: auto;
 }
@@ -132,7 +132,7 @@ body {
   width: 70%;
   margin: auto;
   margin-top: 10px;
-  background-color: #212124;
+  /* background-color: #212124; */
 }
 
 .area-parametros-alerta .titulo-legenda {
@@ -206,7 +206,7 @@ body {
   /* text-align: center; */
   height: 180px;
   /* justify-content: right; */
-  background-color: #212124;
+  /* background-color: #212124; */
   font-size: 20px;
 }
 
@@ -356,7 +356,7 @@ canvas {
   display: flex;
   width: 70%;
   height: fit-content;
-  background-color: #161618;
+  /* background-color: #161618; */
   position: relative;
   top: 0;
   left: 25%;

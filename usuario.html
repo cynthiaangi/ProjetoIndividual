@@ -18,7 +18,7 @@
         </div>
         <nav class="cabecalho-navegacao">
             <a href="./index.html">Sair</a>
-            <a href="">Dados</a>
+            <a href="./public/dashboard/dashboard.html">Dados</a>
             <a href="./login.html">Grupo de Apoio</a>
         </nav>
     </header>
@@ -46,8 +46,8 @@
                     <input type="text" id="ipt_data">
                 </div>
                 <div class="campo">
-                    Tempo de gestação:
-                    <input type="number" id="ipt_tempo"><span>semanas</span>
+                    Tempo de gestação (em semanas):
+                    <input type="number" id="ipt_tempo">
                 </div>
                 <div class="campo">
                     Motivo:
@@ -62,6 +62,22 @@
                 <div class="campo">
                     Descrição:
                     <input type="text" id="ipt_hist">
+                </div>
+                <div class="campo">
+                    Engravidou novamente:
+                    <select name="gravidez" id="sel_nova_gravidez">
+                        <option value="#">Escolha uma opção</option>
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    Aborto de repetição:
+                    <select name="aborto" id="sel_aborto">
+                        <option value="#">Escolha uma opção</option>
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                    </select>
                 </div>
                 <div class="campo">
                     Autoriza a publicação da sua história na página para todos os usuários?
