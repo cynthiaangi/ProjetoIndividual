@@ -1,101 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Login</title>
+    <script src="./public/js/sessao.js"></script>
 
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/img/logo.png">
+    <title>Voz do Amor</title>
 </head>
-
 <body>
-
-    <!--Header-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
+    <header class="cabecalho">
+        <div class="cabecalho-titulo">
+            <img class="cabecalho-titulo-img" src="./assets/img/logo.png" alt="Logo site">
+            <h1>
+                Voz do amor
+            </h1>
         </div>
-    </div>
-
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
+        <nav class="cabecalho-navegacao">
+            <a href="./index.html"> Home</a>
+            <a href="">Sobre Mim</a>
+            <a href="./login.html">Grupo de Apoio</a>
+        </nav>
+    </header>
+    <main class="login">
+        <img class="img-login" src="./assets/img/simbolo_colorido-removebg-preview.png" alt="Símbolo da conscientização da perda gestacional">
+        <section id="card-login">
+            <div class="campo">
+                e-mail: <input id="ipt_email_login" type="text" placeholder="Digite seu e-mail">
             </div>
-        </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
-
-                <div id="div_erros_login"></div>
+            <div class="campo">
+                senha: <input id="ipt_senha_login" type="password" placeholder="Insira a sua senha">
             </div>
-        </div>
-    </div>
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
-        </div>
-    </div>
-    <!--footer fim-->
+            <button class="botoes" onclick="entrar()">Entrar</button>
+            <button class="botoes" onclick="alterarMain()">Novo Usuário</button>
+        </section>
+        <section id="card-cadastro">
+            <div id="div_erro"></div>
+            <div class="campo">   
+                Nome:* <input id="ipt_nome" type="text" placeholder="Digite seu nome">
+            </div>
+            <div class="campo">    
+                Data de Nascimento:* <input id="ipt_nasc" type="text" placeholder="DD/MM/AAAA">
+            </div>
+            <div class="campo">    
+                Gênero:* 
+               <select name="genero" id="sel_gen">
+                    <option value="#">Escolha uma opção</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+               </select>
+            </div>
+            <div class="campo">    
+                E-mail:* <input id="ipt_email" type="text" placeholder="nome@provedor.com">
+            </div>
+            <div class="campo">    
+                Telefone:* <input id="ipt_tel" type="text" placeholder="(XX) 99999-9999">
+            </div>
+            <div class="campo">      
+                Senha:* <input id="ipt_senha" type="password" placeholder="Informe uma senha">
+                <div id="valida-senha">
+                    <li>1 Letra Maiúscula</li>
+                    <li>1 Letra Minúscula</li>
+                    <li>1 Número</li>
+                    <li>1 caractere especial ( !@#$%&* )</li>
+                    <li>Mínimo 8 caracteres</li>
+                </div>
+            </div>
+            <div class="campo">     
+                Confirmação de senha:* <input id="ipt_conf" type="password" placeholder="Informe a senha novamente">
+            </div>
 
+                <button class="botoes" onclick="cadastrar()">Cadastrar</button>
+                <button class="botoes" onclick="voltar()">Voltar</button>
+
+        </section>
+    </main>
+    <footer class="rodape">
+        <h4>
+            Desenvolvido por Cynthia Angi
+        </h4>
+    </footer>
 </body>
-
 </html>
 
 <script>
+    function limparCadastro(){
+        document.getElementById('ipt_nome').value = "";
+        document.getElementById('ipt_nasc').value = "";
+        document.getElementById('ipt_email').value = "";
+        document.getElementById('ipt_senha').value = "";
+        document.getElementById('ipt_conf'). value = "";
+        document.getElementById('ipt_tel').value = "";
+    }
 
+    function alterarMain(){
+        var login = document.getElementById('card-login');
+        var cadastro = document.getElementById('card-cadastro');
 
-    function entrar() {
-        aguardar();
+        login.style.display = 'none';
+        cadastro.style.display = 'flex';
+        limparCadastro();
+    }
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+    function voltar(){
+        var login = document.getElementById('card-login');
+        var cadastro = document.getElementById('card-cadastro');
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        login.style.display = 'flex';
+        cadastro.style.display = 'none';
+    }
+
+    function entrar(){
+        var email = ipt_email_login.value;
+        var senha = ipt_senha_login.value;
+
+        if (email == "" || senha == "") {
+            alert("(Mensagem de erro para todos os campos em branco)");
             finalizarAguardar();
             return false;
         }
@@ -103,8 +127,8 @@
             setInterval(sumirMensagem, 5000)
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", senha);
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -112,8 +136,8 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                emailServer: email,
+                senhaServer: senha
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
@@ -153,8 +177,172 @@
         return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+    function cadastrar(){
+        div_erro.innerHTML = '';
+        var nome = ipt_nome.value;
+        var dtNasc = ipt_nasc.value;
+        var gen = sel_gen.value;
+        var email = ipt_email.value;
+        var senha = ipt_senha.value;
+        var conf = ipt_conf.value;
+        var tel = ipt_tel.value;
+        var arroba = '';
+        var pontoCom = email.indexOf('.com');
+        var arroba = email.indexOf('@');
+        var senhaOk = 0;
+        var senhaMaiusc = senha.toUpperCase();
+        var senhaMinusc = senha.toLowerCase();
+        var especial = '!@#$%&*';
+        var numero = '1234567890';
+        var ano = 0;
+        var mes = 0;
+        var dia = 0;
 
+        if (nome == '' || dtNasc == '' || gen == '#' || email == '' || senha == '' || conf == ''){
+            div_erro.innerHTML = `<p>Todos os campos com (*) devem estar preenchidos!</p><p>Tente novamente.</p>`;
+        } else{
+            for(var i = 0; i < dtNasc.length; i++){
+                if(i == 2 || i == 5){
+                    if(dtNasc[i] != '/'){
+                        dtNasc = false;
+                        break;
+                    }
+                }
+            } 
+            if(dtNasc.length != 10 || dtNasc == false){
+                div_erro.innerHTML = `<p>Formato de data inválido!</p><p>Tente novamente.</p>`;
+            } else{
+                for(var j = 0; j < tel.length; j++){
+                    if(j == 0){
+                        if(tel[j] != '('){
+                            tel = false;
+                            break;
+                        }
+                    }
+                    if(j == 3){
+                        if(tel[j] != ')'){
+                            tel = false;
+                            break;
+                        }
+                    }
+                    if(j == 9){
+                        if(tel[j] != '-'){
+                            tel = false;
+                            break;
+                        }
+                    }
+                }
+                if(tel.length != 14 || tel == false){
+                    div_erro.innerHTML = `<p>Número de telefone formato inválido!</p><p>Tente novamente.</p>`;
+                }else if (nome.length < 3){
+                    div_erro.innerHTML = `<p>O nome precisa conter pelo menos 3 letras!</p><p>Tente novamente.</p>`;
+                } else if(gen != 'feminino'){
+                    div_erro.innerHTML = `<p>Infelizmente você não pode se cadastrar em nosso grupo de apoio.</p><p>Agradecemos o interesse!</p>`;
+                } else if(pontoCom < arroba || arroba == -1 || pontoCom == -1){
+                    div_erro.innerHTML = `<p>Formato de email inválido!</p><p>Tente novamente.</p>`;
+                }  else  {
+                    for(var k = 0; k < senha.length; k++){
+                        if(Number(senha[k]) != NaN){
+                            senhaOk++;
+                            break;
+                        }
+                    }
+                    for(var x = 0; x < senha.length; x++){
+                        if(especial.includes(senha[x])){
+                            senhaOk++;
+                            break;
+                        }
+                    }
+                    if(senhaOk != 2 || senha == senhaMaiusc || senha == senhaMinusc || senha.length < 8){
+                        div_erro.innerHTML = `<p>A senha precisa conter todos os itens listados abaixo do campo!</p><p>Tente novamente.</p>`;
+                    } else if(conf != senha){
+                        div_erro.innerHTML = `<p>A confirmação da senha está diferente da senha informada!</p><p>Tente novamente.</p>`;
+                    }else{
+                        for(var y = 0; y < dtNasc.length; y++){
+                            if(y < 2){
+                                dia += `${dtNasc[y]}`;
+                            } 
+                            if(y > 2 && y < 5){
+                                mes += `${dtNasc[y]}`;
+                            }
+                            if(y > 5){
+                                ano += `${dtNasc[y]}`
+                            } 
+                        }
+                        dtNasc = `${ano}-${mes}-${dia}`;
+                        alert('Cadastro realizado com sucesso, retornando para a tela de login');            
+                        voltar();
+                    }
+                }
+            }
+        }
+        // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
+        dtNascServer: dtNasc,
+        emailServer: email,
+        telefoneServer: tel,
+        generoServer: gen,
+        senhaServer: senha,
+
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+    }
+        
 </script>

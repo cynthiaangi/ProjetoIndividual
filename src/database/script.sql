@@ -9,8 +9,7 @@ dtNasc DATE,
 email VARCHAR(45),
 telefone CHAR(14),
 genero CHAR(8)
-constraint chkGen CHECK(genero IN('Feminino')),
-senha CHAR(12)
+constraint chkGen CHECK(genero IN('Feminino'))
 );
 
 DESC cadastro;
