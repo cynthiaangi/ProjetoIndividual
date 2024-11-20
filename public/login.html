@@ -120,17 +120,17 @@
 
         if (email == "" || senha == "") {
             alert("(Mensagem de erro para todos os campos em branco)");
-            finalizarAguardar();
+            // finalizarAguardar();
             return false;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
+        // else {
+        //     // setInterval(sumirMensagem, 5000)
+        // }
 
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", senha);
 
-        fetch("/usuarios/autenticar", {
+        fetch("/login/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -148,14 +148,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.CPF_USUARIO = json.cpf;
+                    // sessionStorage.CPF_USUARIO = json.cpf;
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./dashboard/usuario.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -166,7 +165,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    // finalizarAguardar(texto);
                 });
             }
 
@@ -277,7 +276,7 @@
             }
         }
         // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/login/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -308,14 +307,14 @@
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
+        //   finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;
@@ -341,8 +340,8 @@
       });
   }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-    }
+//   function sumirMensagem() {
+//     cardErro.style.display = "none";
+//     }
         
 </script>

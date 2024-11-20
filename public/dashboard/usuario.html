@@ -19,7 +19,7 @@
         <nav class="cabecalho-navegacao">
             <a href="../index.html">Sair</a>
             <a href="./dashboard.html">Dados</a>
-            <a href="../login.html">Grupo de Apoio</a>
+            <a href="./usuario.html">Sua página</a>
         </nav>
     </header>
     <main class="conteudo">
@@ -40,10 +40,10 @@
         </section>
         <section class="historia">
             Conte sua história:
-            <div class="form-historia">
+            <div class="form-historia" id="div_formulario">
                 <div class="campo">
                     Data do aborto:
-                    <input type="text" id="ipt_data">
+                    <input type="date" id="ipt_data">
                 </div>
                 <div class="campo">
                     Tempo de gestação (em semanas):
@@ -57,7 +57,7 @@
                         <option value="sim">Outro</option>
                     </select>
                     Qual:
-                    <input id="input_motivo"></input>
+                    <input id="ipt_detalhe"></input>
                 </div>
                 <div class="campo">
                     Descrição:
@@ -88,6 +88,8 @@
                     </select>
                 </div>
                 <button onclick="enviar()">Enviar</button>
+                <div id="div_erro"></div>
+                <button class="botao" id="btn_confirma" onclick="confirmar()">Sim</button>
             </div>
         </section>
 
@@ -99,3 +101,96 @@
     </footer>
 </body>
 </html>
+
+<script>
+       function enviar(){
+        div_erro.innerHTML = '';
+        var data = ipt_data.value;
+        var tempo = ipt_tempo.value;
+        var motivo = sel_motivo.value;
+        var detalhe = ipt_detalhe.value;
+        var descricao = ipt_hist.value;
+        var gravidez = sel_nova_gravidez.value;
+        var aborto = sel_aborto.value;
+        var autorizacao = sel_aut.value;
+        var formulario = document.getElementById('div_formulario');
+        var confirma = document.getElementById('btn_confirma');
+        var fkUser = sessionStorage.ID_USUARIO;
+
+        alert('História enviada com sucesso!')
+            
+        // Enviando o valor da nova input
+        fetch("/usuario/cadastrar", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkUserServer: fkUser,
+        dtAbortoServer: data,
+        tempoServer: tempo,
+        motivoServer: detalhe,
+        descricaoServer: descricao,
+        filhosServer: gravidez,
+        repeticaoServer: aborto,
+        autorizacaoServer: autorizacao
+        
+        }),
+        })
+        .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        
+        if (resposta.ok) {
+        cardErro.style.display = "block";
+        
+        mensagem_erro.innerHTML =
+        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+        
+        setTimeout(() => {
+        window.location = "login.html";
+        }, "2000");
+        
+        limparFormulario();
+        finalizarAguardar();
+        } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+        })
+        .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+        });
+        
+        return false;
+  
+    }
+
+  
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+    }
+        
+</script>

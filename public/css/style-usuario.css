@@ -87,6 +87,10 @@ body{
     height: 200px;
 }
 
+#confirma {
+    display: none;
+}
+
 .rodape{
     background: linear-gradient(97.54deg, #12b79e, #5bc1a6, #08ffda);
     display: flex;

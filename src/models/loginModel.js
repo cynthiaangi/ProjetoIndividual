@@ -10,13 +10,13 @@ function autenticar(email, senha) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(fkUser, dtAborto, tempo, motivo, descricao, filhos, repeticao, autorizacao) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkUser, dtAborto, tempo, motivo, descricao, filhos, repeticao, autorizacao);
+function cadastrar(nome, dtNasc, email, telefone, genero, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, dtNasc, email, telefone, genero, senha);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO historia (fkUser, dtAborto, tempo, motivo, descricao, filhos, repeticao, autorizacao) VALUES ('${fkUser}', '${dtAborto}', '${tempo}', '${motivo}', '${descricao}', '${filhos}', '${repeticao}', '${autorizacao}');
+        INSERT INTO cadastro (nome, dtNasc, email, telefone, genero, senha) VALUES ('${nome}', '${dtNasc}', '${email}', '${telefone}', '${genero}', MD5('${senha}'));
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

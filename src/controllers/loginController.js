@@ -1,4 +1,4 @@
-var usuarioModel = require("../models/usuarioModel");
+var loginModel = require("../models/loginModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -10,7 +10,7 @@ function autenticar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
 
-        usuarioModel.autenticar(email, senha)
+        loginModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -22,10 +22,10 @@ function autenticar(req, res) {
                         // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
                         //     .then((resultadoAquarios) => {
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idCadastro,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senha
+                                        // senha: resultadoAutenticar[0].senha
                                     });
                                 
                         //     })
@@ -49,36 +49,30 @@ function autenticar(req, res) {
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var fkUser = req.body.fkUserServer;
-    var dtAborto = req.body.dtAbortoServer;
-    var tempo = req.body.tempoServer;
-    var motivo = req.body.motivoServer;
-    var descricao = req.body.descricaoServer;
-    var filhos = req.body.filhosServer;
-    var repeticao = req.body.repeticaoServer;
-    var autorizacao = req.body.autorizacaoServer;
-    
+    var nome = req.body.nomeServer;
+    var dtNasc = req.body.dtNascServer;
+    var email = req.body.emailServer;
+    var telefone = req.body.telefoneServer;
+    var genero = req.body.generoServer;
+    var senha = req.body.senhaServer;
+
     // Faça as validações dos valores
-    if (fkUser == undefined) {
+    if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (dtAborto == undefined) {
+    } else if (dtNasc == undefined) {
         res.status(400).send("Sua data de Nascimento está undefined!");
-    } else if (tempo == undefined) {
+    } else if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
-    } else if (motivo == undefined) {
+    } else if (telefone == undefined) {
         res.status(400).send("Seu telefone está undefined!");
-    } else if (descricao == undefined) {
+    } else if (genero == undefined) {
         res.status(400).send("Seu genero está undefined!");
-    } else if (filhos == undefined) {
+    } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!"); 
-    }else if(repeticao == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    }else if(autorizacao == undefined) {
-        res.status(400).send("Sua senha está undefined!");
     }else{
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(fkUser, dtAborto, tempo, motivo, descricao, filhos, repeticao, autorizacao)
+        loginModel.cadastrar(nome, dtNasc, email, telefone, genero, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
