@@ -42,5 +42,4 @@ SELECT * FROM cadastro;
 
 SELECT idCadastro, nome, dtNasc, email, telefone, genero FROM cadastro WHERE email = 'julia@gmail.com' AND senha = MD5('34@Teste');
 
-delete from cadastro
-	where idCadastro = 2;
+select * from historia;

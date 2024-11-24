@@ -16,11 +16,22 @@ body{
 }
 
 .sobre-capa{
-    width: 100%;
     height: 100%;
-    background-color: #00000033;
-    margin: 0;
-    background-size: cover;
+    background-color: #00000042;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    font-size: 4rem;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    font-weight: 700;
+}
+
+.img-sobre-mim {
+    width: 25%;
+    height: 300px;
+
 }
 
 .cabecalho {
@@ -39,6 +50,13 @@ body{
     display: flex;
     margin-left: 20px;
     align-items: center;
+}
+
+.frase-capa {
+    width: 30%;
+    padding-left: 350px;
+    color: #356458;
+    font-size: 1.2rem;
 }
 
 .cabecalho-titulo-img{
@@ -65,10 +83,8 @@ body{
     font-style: italic;
     display: flex;
     align-items: center;
-    justify-content: start;
-    font-size: 1.5rem;
-    font-family: "Edu AU VIC WA NT Pre", cursive;
-    font-weight: 700;
+    text-align: center;
+    width: 60%;
 }
 
 .detalhe-arco-iris{
@@ -89,11 +105,16 @@ body{
 }
 
 .conteudo-principal-parte{
-    padding: 10px;
+    /* padding: 10px; */
     width: 50%;
     margin-left: 20px;
     height: 600px;
     border-bottom: 1px solid red;
+}
+
+.minha-historia{
+    display: flex;
+    width: 80%;
 }
 
 .conteudo-lateral{
@@ -102,6 +123,7 @@ body{
     width: 20%;
     display: flex;
     position: fixed;
+    top: 55%;
     left: 80%;
     flex-direction: column;
     align-items: center;
@@ -121,6 +143,19 @@ body{
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.link-google {
+    text-decoration: none;
+    color: #4b0082;
+    background-color: #c9f0ea;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.link-google:hover {
+    color: #c9f0ea;
+    background-color: #4b0082;
 }
 
 .rodape{
