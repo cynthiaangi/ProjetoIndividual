@@ -15,9 +15,7 @@ function listar(req, res) {
 }
 
 function listarPorUsuario(req, res) {
-    var idUsuario = req.params.idUsuario;
-
-    avisoModel.listarPorUsuario(idUsuario)
+    avisoModel.listarPorUsuario()
         .then(
             function (resultado) {
                 if (resultado.length > 0) {

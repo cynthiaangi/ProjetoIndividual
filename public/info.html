@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/img/logo.png">
+    <title>Voz do Amor</title>
+    <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="stylesheet" href="./../css/style-usuario.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="cabecalho-titulo">
+            <img class="cabecalho-titulo-img" src="./assets/img/logo.png" alt="Logo site">
+            <h1>
+                Voz do amor
+            </h1>
+        </div>
+        <nav class="cabecalho-navegacao">
+            <a href="./index.html"> Home</a>
+            <a href="./sobre-mim.html"> Sobre Mim</a>
+            <a href="./info.html">Informativo</a>
+            <a href="./login.html">Grupo de Apoio</a>
+        </nav>
+    </header>
+
+    <h1 class="titulo">
+    Dados do Aborto para a Ciência
+    </h1>
+    <div class="infografico" id="grafico">
+        <div class="graph">
+            <canvas id="myChartCanvas"></canvas>
+        </div>
+        <div class="kpi">
+            <div class="quadradinho">70% de sucesso após aborto de repetição</div>
+            <div class="quadradinho">Taxa de aborto espontâneo: 10 a 15%</div>
+            <div class="quadradinho">Taxa de aborto em mulheres com SOP:<br> 30 a 50%</div>
+        </div>
+    </div>
+    <img class="imagem-divisao" src="./assets/img/png-transparent-rainbow-graphy-rainbow-lines-color-abstract-lines-lines-removebg-preview.png" alt="">
+    <footer class="rodape">
+        <h4>
+            Desenvolvido por Cynthia Angi
+        </h4>
+    </footer>
+</body>
+</html>
+
+<script>
+    
+    const cty = document.getElementById('myChartCanvas');
+    new Chart(cty, {
+      type: 'bar',
+      data: {
+        labels: ['Causas específicas', 'Sem causa relatada', 'Aborto com repetição', 'Até 12ª semana', 'Até 20ª semana'],
+        datasets: [{
+          label: 'Porcentagem (%)',
+          data: [15, 85, 5, 80, 20],
+          borderWidth: 1,
+          borderColor: 'rgb(95, 196, 171)',
+          backgroundColor: 'rgb(95, 196, 171)'
+        }
+      ]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Estatísticas do Aborto',
+            color: 'rgb(0,0,0)',
+            font: {
+              size: 24
+            },
+            padding: {
+              bottom: 40
+            }
+          },
+          legend:{
+          labels: {
+            color: 'rgb(0, 0, 0)',
+            font: {
+              size: 16
+            }
+          }
+        }
+        },
+        scales: {
+          x: {
+                ticks: {
+                    color: 'rgb(9, 9, 9)',
+                },
+                title: {
+                    display: true,
+                    text: 'informações',
+                    color: 'rgb(9, 9, 9)',
+                    font: {
+                      size: 16
+                    }
+                }
+            },
+          y: {
+            beginAtZero: true,
+            ticks: {
+                    color: 'rgb(9, 9, 9)',
+                },
+                title: {
+                    display: true,
+                    text: 'Porcentagem',
+                    color: 'rgb(9, 9, 9)',
+                    font: {
+                      size: 16
+                    }
+                }
+          }
+        }
+      }
+    });
+</script>
+

@@ -24,18 +24,13 @@
     </header>
     <main class="conteudo">
         <section class="conteudo-principal">
-            <p class="conteudo-principal-parte">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit blanditiis totam deserunt voluptate repellat rem minus quod eos adipisci nihil tempore, ipsa minima at. Eius unde mollitia accusantium rem magni.
-            </p>
-            <p class="conteudo-principal-parte">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit blanditiis totam deserunt voluptate repellat rem minus quod eos adipisci nihil tempore, ipsa minima at. Eius unde mollitia accusantium rem magni.
-            </p>
-            <p class="conteudo-principal-parte">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit blanditiis totam deserunt voluptate repellat rem minus quod eos adipisci nihil tempore, ipsa minima at. Eius unde mollitia accusantium rem magni.
-            </p>
-            <p class="conteudo-principal-parte">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit blanditiis totam deserunt voluptate repellat rem minus quod eos adipisci nihil tempore, ipsa minima at. Eius unde mollitia accusantium rem magni.
-            </p>
+            <div class="historias">
+                <h1>Algumas histórias</h1>
+                    <div class="div-results">
+                        <div id="historias_container" class="feed-container">
+                        </div>
+                    </div>
+            </div>
                 
         </section>
         <section class="historia">
@@ -167,8 +162,6 @@
   
     }
 
-  
-
   // Listando empresas cadastradas 
   function listar() {
     fetch("/empresas/listar", {
@@ -192,5 +185,95 @@
   function sumirMensagem() {
     cardErro.style.display = "none";
     }
-        
+
+    window.onload = atualizarHistorias();
+    function atualizarHistorias() {
+        fetch("/avisos/listar/:idUsuario").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var historias = document.getElementById("historias_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    historias.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var historias = document.getElementById("historias_container");
+                    historias.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanData = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var spanSemanas = document.createElement("span");
+                        var spanMotivo = document.createElement("span");
+                        var spanFilhos = document.createElement("span");
+                        var spanRepeticao = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        // var divButtons = document.createElement("div");
+                        // var btnEditar = document.createElement("button");
+                        // var btnDeletar = document.createElement("button");
+
+
+                        spanID.innerHTML = "ID: <b>" + publicacao.idHistoria + "</b>";
+                        spanNome.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
+                        spanData.innerHTML = "Data do Aborto: <b>" + publicacao.dtAborto + "</b>";
+                        spanSemanas.innerHTML = "Tempo: <b>" + publicacao.semanas + " semanas</b>";
+                        spanMotivo.innerHTML = "Causa: <b>" + publicacao.motivo + "</b>";
+                        spanFilhos.innerHTML = "Filhos após perda: <b>" + publicacao.filhos + "</b>";
+                        spanRepeticao.innerHTML = "Aborto de repetição: <b>" + publicacao.repeticao + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        // btnEditar.innerHTML = "Editar";
+                        // btnDeletar.innerHTML = "Deletar";
+
+                        divPublicacao.className = "publicacao";
+                        spanID.id = "inputNumero" + publicacao.idHistoria;
+                        spanNome.className = "publicacao-nome";
+                        spanData.className = "publicacao-titulo";
+                        spanSemanas.className = "publicacao-semanas"
+                        spanMotivo.className = "publicacao-motivo"
+                        spanFilhos.className = "publicacao-filhos"
+                        spanRepeticao.className = "publicacao-repeticao"
+                        divDescricao.className = "publicacao-descricao";
+
+                        // divButtons.className = "div-buttons"
+
+                        // btnEditar.className = "publicacao-btn-editar"
+                        // btnEditar.id = "btnEditar" + publicacao.idAviso;
+                        // btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
+
+                        // btnDeletar.className = "publicacao-btn-editar"
+                        // btnDeletar.id = "btnDeletar" + publicacao.idAviso;
+                        // btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanData);
+                        divPublicacao.appendChild(spanSemanas);
+                        divPublicacao.appendChild(spanMotivo);
+                        divPublicacao.appendChild(spanFilhos);
+                        divPublicacao.appendChild(spanRepeticao);
+                        divPublicacao.appendChild(divDescricao);
+                        // divPublicacao.appendChild(divButtons);
+                        // divButtons.appendChild(btnEditar);
+                        // divButtons.appendChild(btnDeletar);
+                        historias.appendChild(divPublicacao);
+                    }
+
+                    finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
 </script>
