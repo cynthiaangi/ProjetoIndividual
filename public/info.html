@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="./assets/img/logo.png">
     <title>Voz do Amor</title>
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <link rel="stylesheet" href="./../css/style-usuario.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -32,16 +29,19 @@
     Dados do Aborto para a Ciência
     </h1>
     <div class="infografico" id="grafico">
-        <div class="graph">
-            <canvas id="myChartCanvas"></canvas>
-        </div>
-        <div class="kpi">
-            <div class="quadradinho">70% de sucesso após aborto de repetição</div>
-            <div class="quadradinho">Taxa de aborto espontâneo: 10 a 15%</div>
-            <div class="quadradinho">Taxa de aborto em mulheres com SOP:<br> 30 a 50%</div>
-        </div>
+      <div class="graph">
+        <canvas id="myChartCanvas"></canvas>
+        <canvas id="myChart2"></canvas>
+      </div>
+      <div class="kpi">
+        <div class="quadradinho">70% de sucesso após aborto de repetição</div>
+        <div class="quadradinho">Taxa de aborto espontâneo: 10 a 15%</div>
+        <div class="quadradinho">Taxa de aborto em mulheres com SOP:<br> 30 a 50%</div>
+      </div>
     </div>
-    <img class="imagem-divisao" src="./assets/img/png-transparent-rainbow-graphy-rainbow-lines-color-abstract-lines-lines-removebg-preview.png" alt="">
+    <div class="separador">
+      <img class="imagem-divisao" src="./assets/img/png-transparent-rainbow-graphy-rainbow-lines-color-abstract-lines-lines-removebg-preview.png" alt="">
+    </div>
     <footer class="rodape">
         <h4>
             Desenvolvido por Cynthia Angi
@@ -52,8 +52,8 @@
 
 <script>
     
-    const cty = document.getElementById('myChartCanvas');
-    new Chart(cty, {
+    const graficoBar = document.getElementById('myChartCanvas');
+    new Chart(graficoBar, {
       type: 'bar',
       data: {
         labels: ['Causas específicas', 'Sem causa relatada', 'Aborto com repetição', 'Até 12ª semana', 'Até 20ª semana'],
@@ -100,7 +100,7 @@
                     font: {
                       size: 16
                     }
-                }
+                } 
             },
           y: {
             beginAtZero: true,
@@ -119,5 +119,34 @@
         }
       }
     });
+
+    const graficoLine = document.getElementById('myChart2');
+
+    new Chart(graficoLine, {
+      type: 'line',
+      data: {
+        labels: ['1º trimestre', '2º trimestre', '3º trimestre'],
+        datasets: [{
+          label: 'Casos de aborto com motivo',
+          data: [20, 75, 90],
+          borderWidth: 1,
+          borderColor: 'rgb(255, 25, 115)',
+          backgroundColor: 'rgb(255, 25, 115)'
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Porcentagem de abortos com motivo por trimestre'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    })
 </script>
 
