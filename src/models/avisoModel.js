@@ -26,22 +26,25 @@ function listar() {
     return database.executar(instrucaoSql);
 }
 
-function pesquisarDescricao(texto) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
+function postarKpi() {
     var instrucaoSql = `
-        SELECT 
-            a.id AS idAviso,
-            a.titulo,
-            a.descricao,
-            a.fk_usuario,
-            u.id AS idUsuario,
-            u.nome,
-            u.email,
-            u.senha
-        FROM aviso a
-            INNER JOIN usuario u
-                ON a.fk_usuario = u.id
-        WHERE a.descricao LIKE '${texto}';
+        SELECT count(motivo) AS soma FROM historia WHERE motivo = '';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function postarKpi2() {
+    var instrucaoSql = `
+        SELECT count(filhos) AS filho FROM historia WHERE filhos = 'sim';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function postarKpi3() {
+    var instrucaoSql = `
+        SELECT count(tempo) AS semanas FROM historia WHERE tempo > 12;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -72,10 +75,9 @@ function listarPorUsuario() {
     return database.executar(instrucaoSql);
 }
 
-function publicar(titulo, descricao, idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
+function calcularTotal() {
     var instrucaoSql = `
-        INSERT INTO aviso (titulo, descricao, fk_usuario) VALUES ('${titulo}', '${descricao}', ${idUsuario});
+        SELECT count(idHistoria) AS total FROM historia;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -102,8 +104,10 @@ function deletar(idAviso) {
 module.exports = {
     listar,
     listarPorUsuario,
-    pesquisarDescricao,
-    publicar,
+    postarKpi,
+    postarKpi2,
+    postarKpi3,
+    calcularTotal,
     editar,
     deletar
 }

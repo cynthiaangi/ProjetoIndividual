@@ -11,16 +11,20 @@ router.get("/listar/:idUsuario", function (req, res) {
     avisoController.listarPorUsuario(req, res);
 });
 
-router.get("/pesquisar/:descricao", function (req, res) {
-    avisoController.pesquisarDescricao(req, res);
+router.get("/kpi", function (req, res) {
+    avisoController.postarKpi(req, res);
 });
 
-router.post("/publicar/:idUsuario", function (req, res) {
-    avisoController.publicar(req, res);
+router.get("/kpiTotal", function (req, res) {
+    avisoController.calcularTotal(req, res);
 });
 
-router.put("/editar/:idAviso", function (req, res) {
-    avisoController.editar(req, res);
+router.get("/kpi2", function (req, res) {
+    avisoController.postarKpi2(req, res);
+});
+
+router.get("/kpi3", function (req, res) {
+    avisoController.postarKpi3(req, res);
 });
 
 router.delete("/deletar/:idAviso", function (req, res) {

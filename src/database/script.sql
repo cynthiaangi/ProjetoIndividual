@@ -43,3 +43,7 @@ SELECT * FROM cadastro;
 SELECT idCadastro, nome, dtNasc, email, telefone, genero FROM cadastro WHERE email = 'julia@gmail.com' AND senha = MD5('34@Teste');
 
 select * from historia;
+
+select motivo from historia;
+
+select count(motivo) from historia where motivo = '';

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="icon" href="../assets/img/logo.png">
     <title>Voz do Amor</title>
 </head>
+
 <body>
     <header class="cabecalho">
         <div class="cabecalho-titulo">
@@ -27,12 +29,12 @@
         <section class="conteudo-principal">
             <div class="historias">
                 <h1>Algumas histórias</h1>
-                    <div class="div-results">
-                        <div id="historias_container" class="feed-container">
-                        </div>
+                <div class="div-results">
+                    <div id="historias_container" class="feed-container">
                     </div>
+                </div>
             </div>
-                
+
         </section>
         <section class="historia">
             Conte sua história:
@@ -84,8 +86,6 @@
                     </select>
                 </div>
                 <button onclick="enviar()">Enviar</button>
-                <div id="div_erro"></div>
-                <button class="botao" id="btn_confirma" onclick="confirmar()">Sim</button>
             </div>
         </section>
 
@@ -96,11 +96,13 @@
         </h4>
     </footer>
 </body>
+
 </html>
 
 <script>
-       function enviar(){
-        div_erro.innerHTML = '';
+    window.onload = atualizarHistorias();
+    function enviar() {
+
         var data = ipt_data.value;
         var tempo = ipt_tempo.value;
         var motivo = sel_motivo.value;
@@ -113,81 +115,50 @@
         var confirma = document.getElementById('btn_confirma');
         var fkUser = sessionStorage.ID_USUARIO;
 
-        alert('História enviada com sucesso!')
-            
+        
         // Enviando o valor da nova input
         fetch("/usuario/cadastrar", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        fkUserServer: fkUser,
-        dtAbortoServer: data,
-        tempoServer: tempo,
-        motivoServer: detalhe,
-        descricaoServer: descricao,
-        filhosServer: gravidez,
-        repeticaoServer: aborto,
-        autorizacaoServer: autorizacao
-        
-        }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkUserServer: fkUser,
+                dtAbortoServer: data,
+                tempoServer: tempo,
+                motivoServer: detalhe,
+                descricaoServer: descricao,
+                filhosServer: gravidez,
+                repeticaoServer: aborto,
+                autorizacaoServer: autorizacao
+                
+            }),
         })
         .then(function (resposta) {
-        console.log("resposta: ", resposta);
-        
-        if (resposta.ok) {
-        cardErro.style.display = "block";
-        
-        mensagem_erro.innerHTML =
-        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-        
-        setTimeout(() => {
-        window.location = "login.html";
-        }, "2000");
-        
-        limparFormulario();
-        finalizarAguardar();
-        } else {
-        throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-        })
-        .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-        });
-        
+            console.log("resposta: ", resposta);
+            
+            if (resposta.ok) {
+                
+                    alert('História enviada com sucesso!')
+
+                    atualizarHistorias();
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
         return false;
-  
+
     }
 
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-    }
-
-    window.onload = atualizarHistorias();
     function atualizarHistorias() {
         fetch("/avisos/listar/:idUsuario").then(function (resposta) {
             if (resposta.ok) {
@@ -207,7 +178,7 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
                         var data = new Date(publicacao.dtAborto);
-                        var dataFormatada = data.toLocaleDateString('pt-BR', {year: 'numeric', month: '2-digit', day: '2-digit'});
+                        var dataFormatada = data.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
                         var divPublicacao = document.createElement("div");
                         var spanID = document.createElement("span");
@@ -249,7 +220,6 @@
                         historias.appendChild(divPublicacao);
                     }
 
-                    setInterval(atualizarHistorias, 5000);
                     finalizarAguardar();
                 });
             } else {

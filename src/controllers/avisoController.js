@@ -37,10 +37,9 @@ function listarPorUsuario(req, res) {
         );
 }
 
-function pesquisarDescricao(req, res) {
-    var descricao = req.params.descricao;
-
-    avisoModel.pesquisarDescricao(descricao)
+function postarKpi(req, res) {
+    console.log('Vim para a controller')
+    avisoModel.postarKpi()
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -58,19 +57,48 @@ function pesquisarDescricao(req, res) {
         );
 }
 
-function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var idUsuario = req.params.idUsuario;
+function postarKpi2(req, res) {
+    console.log('Vim para a controller')
+    avisoModel.postarKpi2()
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
-    if (titulo == undefined) {
-        res.status(400).send("O título está indefinido!");
-    } else if (descricao == undefined) {
-        res.status(400).send("A descrição está indefinido!");
-    } else if (idUsuario == undefined) {
-        res.status(403).send("O id do usuário está indefinido!");
-    } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+function postarKpi3(req, res) {
+    console.log('Vim para a controller')
+    avisoModel.postarKpi3()
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function calcularTotal(req, res) {
+        avisoModel.calcularTotal()
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -83,7 +111,7 @@ function publicar(req, res) {
                     res.status(500).json(erro.sqlMessage);
                 }
             );
-    }
+    
 }
 
 function editar(req, res) {
@@ -127,8 +155,10 @@ function deletar(req, res) {
 module.exports = {
     listar,
     listarPorUsuario,
-    pesquisarDescricao,
-    publicar,
+    postarKpi,
+    postarKpi2,
+    postarKpi3,
+    calcularTotal,
     editar,
     deletar
 }
