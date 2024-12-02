@@ -38,6 +38,8 @@ DESC historia;
 INSERT INTO cadastro (nome, dtNasc, email, telefone, genero, senha) VALUES
 ('Julia', '2005-03-02', 'julia@gmail.com', '(11)98765-4321', 'feminino', MD5('34@Teste'));
 
+SELECT count(tempo) AS semanas FROM historia WHERE tempo > 12;
+
 SELECT * FROM cadastro;
 
 SELECT idCadastro, nome, dtNasc, email, telefone, genero FROM cadastro WHERE email = 'julia@gmail.com' AND senha = MD5('34@Teste');

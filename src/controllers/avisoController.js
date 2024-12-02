@@ -38,7 +38,6 @@ function listarPorUsuario(req, res) {
 }
 
 function postarKpi(req, res) {
-    console.log('Vim para a controller')
     avisoModel.postarKpi()
         .then(
             function (resultado) {
@@ -58,7 +57,6 @@ function postarKpi(req, res) {
 }
 
 function postarKpi2(req, res) {
-    console.log('Vim para a controller')
     avisoModel.postarKpi2()
         .then(
             function (resultado) {

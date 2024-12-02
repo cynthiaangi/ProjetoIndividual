@@ -78,6 +78,7 @@
 <script>
 
     window.onload = calcularTotal();
+    var dados = []
 
 
     function calcularTotal() {
@@ -98,9 +99,13 @@
                         var tudo = respostaTotal.total;
 
                     }
-
-                    calcularCausa(tudo);
-                    calcularFilhos(tudo);
+                    return Promise.all([
+                        calcularCausa(tudo),
+                        calcularFilhos(tudo),
+                        calcularTempo(tudo)
+                    ]).then(() => {
+                        plotarGrafico();
+                    });
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -111,9 +116,8 @@
         });
     }
 
-
     function calcularCausa(total) {
-        fetch("/avisos/kpi").then(function (resposta) {
+        return fetch("/avisos/kpi").then(function (resposta) {
             if (resposta.ok) {
                 console.log('Cai na função calcular causa')
                 if (resposta.status == 204) {
@@ -130,7 +134,11 @@
                     causas.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var valor = resposta[i];
-                        var valorReal = 100 - (valor.soma) / total * 100
+                        var valorReal = 100 - (valor.soma) / total * 100;
+                        var valorSem = 100 - valorReal;
+
+                        dados.push(valorReal);
+                        dados.push(valorSem);
 
                         var divPublicacao = document.createElement("div");
                         var spanCausa = document.createElement("span");
@@ -156,7 +164,7 @@
     }
 
     function calcularFilhos(total) {
-        fetch("/avisos/kpi2").then(function (resposta) {
+        return fetch("/avisos/kpi2").then(function (resposta) {
             if (resposta.ok) {
                 console.log('Cai na função calcular filhos')
                 if (resposta.status == 204) {
@@ -173,12 +181,12 @@
                     filhos.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var valor = resposta[i];
-                        var valorReal = (valor.filho) / total * 100
+                        var valorReal = (valor.filho) / total * 100;
 
                         var divPublicacao = document.createElement("div");
                         var spanFilho = document.createElement("span");
 
-                        spanFilho.innerHTML = `Porcentagem de casos com Causa: <b> ${(valorReal)} %</b>`;
+                        spanFilho.innerHTML = `Porcentagem de casos com Filhos após aborto: <b> ${(valorReal)} %</b>`;
 
                         divPublicacao.className = "publicacao";
                         spanFilho.className = "publicacao-filho";
@@ -199,9 +207,9 @@
     }
 
     function calcularTempo(total) {
-        fetch("/avisos/kpi3").then(function (resposta) {
+        return fetch("/avisos/kpi3").then(function (resposta) {
             if (resposta.ok) {
-                console.log('Cai na função calcular filhos')
+                console.log('Cai na função calcular tempo')
                 if (resposta.status == 204) {
                     var tempo = document.getElementById("idSeguntoTrimestre");
                     var mensagem = document.createElement("span");
@@ -216,18 +224,23 @@
                     tempo.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var valor = resposta[i];
-                        var valorReal = (valor.filho) / total * 100
+                        console.log(valor);
+                        var valorReal = (valor.semanas) / total * 100;
+                        valorPrimeiro = 100 - valorReal;
+
+                        dados.push(valorPrimeiro);
+                        dados.push(valorReal);
 
                         var divPublicacao = document.createElement("div");
-                        var spanFilho = document.createElement("span");
+                        var spanTempo = document.createElement("span");
 
-                        spanFilho.innerHTML = `Porcentagem de casos com Causa: <b> ${(valorReal)} %</b>`;
+                        spanTempo.innerHTML = `Porcentagem de casos dentro do 2º trimestre: <b> ${(valorReal)} %</b>`;
 
                         divPublicacao.className = "publicacao";
-                        spanFilho.className = "publicacao-filho";
+                        spanTempo.className = "publicacao-tempo";
 
-                        divPublicacao.appendChild(spanFilho);
-                        filhos.appendChild(divPublicacao);
+                        divPublicacao.appendChild(spanTempo);
+                        tempo.appendChild(divPublicacao);
                     }
 
                     finalizarAguardar();
@@ -241,7 +254,10 @@
         });
     }
 
-    const graficoBar = document.getElementById('myChartCanvas');
+    function plotarGrafico(){
+        console.log('entrei na função do gráfico');
+        console.log(dados);
+        const graficoBar = document.getElementById('myChartCanvas');
     new Chart(graficoBar, {
         type: 'bar',
         data: {
@@ -255,7 +271,7 @@
             },
             {
                 label: 'Dados coletados',
-                data: [],
+                data: dados,
                 borderWidth: 1,
                 borderColor: 'rgb(95, 196, 171)',
                 backgroundColor: 'rgb(95, 196, 171)'
@@ -315,169 +331,8 @@
             }
         }
     });
-    //     const ctz = document.getElementById('myChart2');
 
-    //   new Chart(ctz, {
-    //     type: 'pie',
-    //     data: {
-    //       labels: ['Dentro da faixa', 'Fora da faixa'],
-    //       datasets: [{
-    //         label: 'Porcentagem',
-    //         data: [71, 29],
-    //         borderWidth: 1,
-    //         backgroundColor: ['rgb(95, 196, 171)', 'rgb(255, 25, 115)'],
-    //         borderColor: ['rgb(95, 196, 171)', 'rgb(255, 25, 115)']
-    //       }]
-    //     },
-    //     options: {
-    //       plugins: {
-    //           title: {
-    //             display: true,
-    //             text: 'proporção da faixa de umidade por tempo'
-    //           }
-    //         },
-    //       scales: {
-    //         y: {
-    //           beginAtZero: true
-    //         }
-    //       }
-    //     }
-    //   });
-
-    //   const cta = document.getElementById('myChart3');
-
-    //   new Chart(cta, {
-    //     type: 'pie',
-    //     data: {
-    //       labels: ['Dentro da faixa', 'Fora da faixa'],
-    //       datasets: [{
-    //         label: 'Porcentagem',
-    //         data: [58, 42],
-    //         borderWidth: 1,
-    //         backgroundColor: ['rgb(95, 196, 171)', 'rgb(255, 25, 115)'],
-    //         borderColor: ['rgb(95, 196, 171)', 'rgb(255, 25, 115)']
-    //       }]
-    //     },
-    //     options: {
-    //       plugins: {
-    //           title: {
-    //             display: true,
-    //             text: 'proporção da faixa de temperatura por tempo'
-    //           }
-    //         },
-    //       scales: {
-    //         y: {
-    //           beginAtZero: true
-    //         }
-    //       }
-    //     }
-    //   });
-
-
-
-
-    // b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    // let proximaAtualizacao;
-
-    // window.onload = exibirAquariosDoUsuario();
-
-    // function exibirAquarios() {
-    //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-    //         document.getElementById("cardAquarios").innerHTML += `
-    //                 <div class="card-aquario">
-    //                     <div class="title-aquario">
-    //                         <h1>${item.descricao}</h1>
-    //                     </div>
-    //                     <div class="desc-aquario">
-    //                     <div class="temperatura">
-    //                         <p id="temp_aquario_${item.id}">-°C</p>
-    //                     </div>
-    //                     <div class="cor-alerta" id="card_${item.id}"></div>
-    //                 </div>
-    //                 </div>
-    //                 `
-    //     });
-    // }
-
-    // function exibirAquariosDoUsuario() {
-    //     var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-    //     aquarios.forEach(item => {
-    //         document.getElementById("btnAquario").innerHTML += `
-    //         <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-    //         `
-
-    //         document.getElementById("graficos").innerHTML += `
-    //             <div id="grafico${item.id}" class="display-none">
-    //                 <h3 class="tituloGraficos">
-    //                     <span id="tituloAquario${item.id}">${item.descricao}</span>
-    //                 </h3>
-    //                 <div class="graph">
-    //                     <canvas id="myChartCanvas${item.id}"></canvas>
-    //                 </div>
-    //                 <div class="label-captura">
-    //                     <p id="avisoCaptura${item.id}" style="color: white"></p>
-    //                 </div>
-    //             </div>
-    //         `
-
-    //         obterDadosGrafico(item.id)
-    //     });
-
-    //     if (aquarios.length > 0) {
-    //         exibirAquario(aquarios[0].id)
-    //     }
-    // }
-
-    // function alterarTitulo(idAquario) {
-    //     var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    // }
-
-    // function exibirAquario(idAquario) {
-    //     let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
-
-    //     for (i = 0; i < todosOsGraficos.length; i++) {
-    //         // exibindo - ou não - o gráfico
-    //         if (todosOsGraficos[i].id != idAquario) {
-    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-    //             if (elementoAtual.classList.contains("display-block")) {
-    //                 elementoAtual.classList.remove("display-block")
-    //             }
-    //             elementoAtual.classList.add("display-none")
-
-    //             // alterando estilo do botão
-    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-    //             if (btnAtual.classList.contains("btn-pink")) {
-    //                 btnAtual.classList.remove("btn-pink")
-    //             }
-    //             btnAtual.classList.add("btn-white")
-    //         }
-    //     }
-
-    //     // exibindo - ou não - o gráfico
-    //     let graficoExibir = document.getElementById(`grafico${idAquario}`)
-    //     graficoExibir.classList.remove("display-none")
-    //     graficoExibir.classList.add("display-block")
-
-    //     // alterando estilo do botão
-    //     let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-    //     btnExibir.classList.remove("btn-white")
-    //     btnExibir.classList.add("btn-pink")
-    // }
-
-    // // O gráfico é construído com três funções:
-    // // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    // //     Para ajustar o "select", ajuste o comando sql em src/models
+    }
 
 </script>
 
