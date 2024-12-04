@@ -27,8 +27,8 @@ router.get("/kpi3", function (req, res) {
     avisoController.postarKpi3(req, res);
 });
 
-router.delete("/deletar/:idAviso", function (req, res) {
-    avisoController.deletar(req, res);
+router.get("/kpi4", function (req, res) {
+    avisoController.postarKpi4(req, res);
 });
 
 module.exports = router;

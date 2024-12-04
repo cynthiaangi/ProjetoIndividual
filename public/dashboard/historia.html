@@ -30,7 +30,7 @@
     <main class="conteudo">
         <section class="conteudo-principal">
             <div class="historias">
-                <h1>Suas histórias</h1>
+                <h1>Algumas histórias</h1>
                 <div class="div-results">
                     <div id="historias_container" class="feed-container">
                     </div>
@@ -162,7 +162,6 @@
     }
 
     function atualizarHistorias() {
-         var idUsuario = sessionStorage.ID_USUARIO
         fetch("/avisos/listar/:idUsuario").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -182,46 +181,45 @@
                         var publicacao = resposta[i];
                         var data = new Date(publicacao.dtAborto);
                         var dataFormatada = data.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-                        if(publicacao.fkUser == idUsuario){
-                            var divPublicacao = document.createElement("div");
-                            var spanID = document.createElement("span");
-                            var spanData = document.createElement("span");
-                            var spanNome = document.createElement("span");
-                            var spanSemanas = document.createElement("span");
-                            var spanMotivo = document.createElement("span");
-                            var spanFilhos = document.createElement("span");
-                            var spanRepeticao = document.createElement("span");
-                            var divDescricao = document.createElement("div");
-    
-                            spanID.innerHTML = "ID: <b>" + publicacao.idHistoria + "</b>";
-                            spanNome.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
-                            spanData.innerHTML = "Data do Aborto: <b>" + dataFormatada + "</b>";
-                            spanSemanas.innerHTML = "Tempo: <b>" + publicacao.semanas + " semanas</b>";
-                            spanMotivo.innerHTML = "Causa: <b>" + publicacao.motivo + "</b>";
-                            spanFilhos.innerHTML = "Filhos após perda: <b>" + publicacao.filhos + "</b>";
-                            spanRepeticao.innerHTML = "Aborto de repetição: <b>" + publicacao.repeticao + "</b>";
-                            divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-    
-                            divPublicacao.className = "publicacao";
-                            spanID.id = "inputNumero" + publicacao.idHistoria;
-                            spanNome.className = "publicacao-nome";
-                            spanData.className = "publicacao-titulo";
-                            spanSemanas.className = "publicacao-semanas"
-                            spanMotivo.className = "publicacao-motivo"
-                            spanFilhos.className = "publicacao-filhos"
-                            spanRepeticao.className = "publicacao-repeticao"
-                            divDescricao.className = "publicacao-descricao";
-    
-                            divPublicacao.appendChild(spanID);
-                            divPublicacao.appendChild(spanNome);
-                            divPublicacao.appendChild(spanData);
-                            divPublicacao.appendChild(spanSemanas);
-                            divPublicacao.appendChild(spanMotivo);
-                            divPublicacao.appendChild(spanFilhos);
-                            divPublicacao.appendChild(spanRepeticao);
-                            divPublicacao.appendChild(divDescricao);
-                            historias.appendChild(divPublicacao);
-                        }
+
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanData = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var spanSemanas = document.createElement("span");
+                        var spanMotivo = document.createElement("span");
+                        var spanFilhos = document.createElement("span");
+                        var spanRepeticao = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+
+                        spanID.innerHTML = "ID: <b>" + publicacao.idHistoria + "</b>";
+                        spanNome.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
+                        spanData.innerHTML = "Data do Aborto: <b>" + dataFormatada + "</b>";
+                        spanSemanas.innerHTML = "Tempo: <b>" + publicacao.semanas + " semanas</b>";
+                        spanMotivo.innerHTML = "Causa: <b>" + publicacao.motivo + "</b>";
+                        spanFilhos.innerHTML = "Filhos após perda: <b>" + publicacao.filhos + "</b>";
+                        spanRepeticao.innerHTML = "Aborto de repetição: <b>" + publicacao.repeticao + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+
+                        divPublicacao.className = "publicacao";
+                        spanID.id = "inputNumero" + publicacao.idHistoria;
+                        spanNome.className = "publicacao-nome";
+                        spanData.className = "publicacao-titulo";
+                        spanSemanas.className = "publicacao-semanas"
+                        spanMotivo.className = "publicacao-motivo"
+                        spanFilhos.className = "publicacao-filhos"
+                        spanRepeticao.className = "publicacao-repeticao"
+                        divDescricao.className = "publicacao-descricao";
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanData);
+                        divPublicacao.appendChild(spanSemanas);
+                        divPublicacao.appendChild(spanMotivo);
+                        divPublicacao.appendChild(spanFilhos);
+                        divPublicacao.appendChild(spanRepeticao);
+                        divPublicacao.appendChild(divDescricao);
+                        historias.appendChild(divPublicacao);
                     }
 
                     finalizarAguardar();

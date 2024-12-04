@@ -36,9 +36,11 @@
             </h1>
         </div>
         <nav class="cabecalho-navegacao">
-            <a href="./index.html">Sair</a>
-            <a href="./public/dashboard/dashboard.html">Dados</a>
-            <a href="./login.html">Grupo de Apoio</a>
+            <a href="../index.html">Home</a>
+            <a href="./usuario.html">Sua página</a>
+            <a href="./historia.html">Histórias</a>
+            <a href="./dashboard.html">Dados</a>
+            <a href="../login.html">Logout</a>
         </nav>
     </header>
 
@@ -99,13 +101,12 @@
                         var tudo = respostaTotal.total;
 
                     }
-                    return Promise.all([
-                        calcularCausa(tudo),
-                        calcularFilhos(tudo),
-                        calcularTempo(tudo)
-                    ]).then(() => {
-                        plotarGrafico();
-                    });
+                    
+                        calcularCausa(tudo);
+                        calcularRepeticao(tudo);
+                        calcularFilhos(tudo);
+                        calcularTempo(tudo);
+
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -138,7 +139,9 @@
                         var valorSem = 100 - valorReal;
 
                         dados.push(valorReal);
+                        console.log(dados);
                         dados.push(valorSem);
+                        console.log(dados);
 
                         var divPublicacao = document.createElement("div");
                         var spanCausa = document.createElement("span");
@@ -206,6 +209,34 @@
         });
     }
 
+    function calcularRepeticao(total) {
+        return fetch("/avisos/kpi4").then(function (resposta) {
+            if (resposta.ok) {
+                console.log('Cai na função calcular repeticao')
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (let i = 0; i < resposta.length; i++) {
+
+                        var valor1 = resposta[i];
+                        console.log(valor1);
+                        var valorReal = (valor1.aborto) / total * 100;
+                        console.log(valorReal);
+
+                        dados.push(valorReal);
+
+                    }
+
+                    finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
+
     function calcularTempo(total) {
         return fetch("/avisos/kpi3").then(function (resposta) {
             if (resposta.ok) {
@@ -229,7 +260,9 @@
                         valorPrimeiro = 100 - valorReal;
 
                         dados.push(valorPrimeiro);
+                        console.log(dados);
                         dados.push(valorReal);
+                        console.log(dados);
 
                         var divPublicacao = document.createElement("div");
                         var spanTempo = document.createElement("span");
@@ -243,6 +276,7 @@
                         tempo.appendChild(divPublicacao);
                     }
 
+                    plotarGrafico();
                     finalizarAguardar();
                 });
             } else {

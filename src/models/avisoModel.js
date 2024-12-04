@@ -50,6 +50,14 @@ function postarKpi3() {
     return database.executar(instrucaoSql);
 }
 
+function postarKpi4() {
+    var instrucaoSql = `
+        SELECT count(repeticao) AS aborto FROM historia WHERE repeticao = 'Sim';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function listarPorUsuario() {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
     var instrucaoSql = `
@@ -92,14 +100,14 @@ function editar(novaDescricao, idAviso) {
     return database.executar(instrucaoSql);
 }
 
-function deletar(idAviso) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idAviso);
-    var instrucaoSql = `
-        DELETE FROM aviso WHERE id = ${idAviso};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
+// function deletar(idAviso) {
+//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idAviso);
+//     var instrucaoSql = `
+//         DELETE FROM aviso WHERE id = ${idAviso};
+//     `;
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
 
 module.exports = {
     listar,
@@ -107,7 +115,7 @@ module.exports = {
     postarKpi,
     postarKpi2,
     postarKpi3,
+    postarKpi4,
     calcularTotal,
-    editar,
-    deletar
+    editar
 }

@@ -95,6 +95,26 @@ function postarKpi3(req, res) {
         );
 }
 
+function postarKpi4(req, res) {
+    console.log('Vim para a controller')
+    avisoModel.postarKpi4()
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function calcularTotal(req, res) {
         avisoModel.calcularTotal()
             .then(
@@ -132,24 +152,6 @@ function editar(req, res) {
 
 }
 
-function deletar(req, res) {
-    var idAviso = req.params.idAviso;
-
-    avisoModel.deletar(idAviso)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
 module.exports = {
     listar,
     listarPorUsuario,
@@ -158,5 +160,5 @@ module.exports = {
     postarKpi3,
     calcularTotal,
     editar,
-    deletar
+    postarKpi4
 }
