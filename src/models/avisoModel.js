@@ -20,7 +20,7 @@ function listar() {
         FROM historia as h
             INNER JOIN cadastro as c
                 ON h.fkUser = c.idCadastro
-        WHERE h.autorizacao = 'sim';
+        WHERE h.autorizacao = 'sim' ORDER BY idHistoria DESC LIMIT 3;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

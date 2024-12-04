@@ -13,18 +13,19 @@ body{
     background-size: cover;
     width: 100% !important;
     margin: 0 !important;
+    height: 600px !important;
 }
 
 .sobre-capa{
     height: 100%;
-    background-color: #00000042;
+    /* background-color: #00000042; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
     font-size: 4rem;
-    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* font-family: "Edu AU VIC WA NT Pre", cursive; */
     font-weight: 700;
 }
 
@@ -40,6 +41,13 @@ body{
     text-align: center;
 }
 
+.feed-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 2rem;
+    width: 100%;
+}
+
 .infografico{
     display: flex;
     height: 70%;
@@ -49,6 +57,12 @@ body{
 
 .graph{
     width: 50%;
+}
+
+.titulo-historias{
+    font-size: 2.5rem;
+    text-align: center;
+    width: 100%;
 }
 
 .kpi{
@@ -73,8 +87,8 @@ body{
     margin: 40px auto;
     width: 100%; 
     height: 50px;
-
 }
+
 .cabecalho {
     background: linear-gradient(97.54deg, #12b79e, #5bc1a6, #08ffda);
     /* background-color: #5bc1a6;
@@ -94,10 +108,9 @@ body{
 }
 
 .frase-capa {
-    width: 30%;
-    padding-left: 350px;
     color: #356458;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 .cabecalho-titulo-img{
@@ -121,11 +134,16 @@ body{
 }
 
 .slogan{
-    font-style: italic;
+    /* font-style: italic; */
+    font-weight: 400;
     display: flex;
     align-items: center;
     text-align: center;
     width: 60%;
+    background-color: #12b79e7b;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 3px solid #9e26a2;
 }
 
 .detalhe-arco-iris{
@@ -133,6 +151,7 @@ body{
     background: linear-gradient(90deg, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee);
     background-clip: text;
     color: transparent;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
 }
 
 .conteudo-principal{
@@ -142,15 +161,21 @@ body{
     justify-content: center;
     /* align-items: center; */
     flex-direction: column;
+    gap: 20px;
     
+}
+
+.mensagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .conteudo-principal-parte{
     /* padding: 10px; */
-    width: 50%;
-    margin-left: 20px;
-    height: 600px;
-    border-bottom: 1px solid red;
+    width: 100%;
+    height: 200px;
 }
 
 .minha-historia{
@@ -164,7 +189,7 @@ body{
     width: 20%;
     display: flex;
     position: fixed;
-    top: 55%;
+    top: 60%;
     left: 80%;
     flex-direction: column;
     align-items: center;
@@ -197,6 +222,33 @@ body{
 .link-google:hover {
     color: #c9f0ea;
     background-color: #4b0082;
+}
+
+.historias{
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    color: #12b79e;
+
+}
+
+.detalhe-historia{
+    color: #9e26a2;
+}
+
+#publicacao{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.publicacao{
+    width: 80%;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
 }
 
 .rodape{

@@ -33,11 +33,18 @@
                     <div class="detalhe-arco-iris"> Arco-íris! </div>
                 </div>
             </div>
-            <div class="conteudo-principal-parte">
-                <h3 class="frase-capa">Sabemos que foi difícil e sempre vai faltar um pedacinho de você! Estamos aqui, todas juntas, para nos sentirmos acolhidas, abraçadas e sermos mães de anjinhos.</h3>
+            <div class="separador">
+                <img class="imagem-divisao" src="./assets/img/png-transparent-rainbow-graphy-rainbow-lines-color-abstract-lines-lines-removebg-preview.png" alt="">
+              </div>
+            <div class="mensagem conteudo-principal-parte">
+                <h3 class="frase-capa">Sabemos que foi difícil e sempre vai faltar um pedacinho de você!</h3>
+                <h3 class="frase-capa">Estamos aqui, todas juntas, para nos sentirmos acolhidas, abraçadas e sermos mães de anjinhos.</h3>
             </div>
+            <div class="separador">
+                <img class="imagem-divisao" src="./assets/img/png-transparent-rainbow-graphy-rainbow-lines-color-abstract-lines-lines-removebg-preview.png" alt="">
+              </div>
             <div class="historias">
-                <h1>Algumas histórias</h1>
+                <h1 class="titulo-historias">Algumas histórias</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
                         </div>
@@ -95,14 +102,14 @@
                         var spanRepeticao = document.createElement("span");
                         var divDescricao = document.createElement("div");
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idHistoria + "</b>";
-                        spanNome.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
-                        spanData.innerHTML = "Data do Aborto: <b>" + dataFormatada + "</b>";
-                        spanSemanas.innerHTML = "Tempo: <b>" + publicacao.semanas + " semanas</b>";
-                        spanMotivo.innerHTML = "Causa: <b>" + publicacao.motivo + "</b>";
-                        spanFilhos.innerHTML = "Filhos após perda: <b>" + publicacao.filhos + "</b>";
-                        spanRepeticao.innerHTML = "Aborto de repetição: <b>" + publicacao.repeticao + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        spanID.innerHTML = 'ID: <b class="detalhe-historia">' + publicacao.idHistoria + "</b>";
+                        spanNome.innerHTML = 'Nome: <b class="detalhe-historia">' + publicacao.nome + "</b>";
+                        spanData.innerHTML = 'Data do Aborto: <b class="detalhe-historia">' + dataFormatada + "</b>";
+                        spanSemanas.innerHTML = 'Tempo: <b class="detalhe-historia">' + publicacao.semanas + " semanas</b>";
+                        spanMotivo.innerHTML = 'Causa: <b class="detalhe-historia">' + publicacao.motivo + "</b>";
+                        spanFilhos.innerHTML = 'Filhos após perda: <b class="detalhe-historia">' + publicacao.filhos + "</b>";
+                        spanRepeticao.innerHTML = 'Aborto de repetição: <b class="detalhe-historia">' + publicacao.repeticao + "</b>";
+                        divDescricao.innerHTML = 'Descrição: <b class="detalhe-historia">' + publicacao.descricao + "</b>";
 
                         divPublicacao.className = "publicacao";
                         spanID.id = "inputNumero" + publicacao.idHistoria;
