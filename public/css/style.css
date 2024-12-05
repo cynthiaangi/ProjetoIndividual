@@ -3,9 +3,10 @@
 
 
 body{
+    background-color: rgba(225, 228, 247, 0.473);
     font-family: "Kavoon";
     color: #9e26a2;
-    height: 100%;
+    height: 100vh;
 }
 
 .capa {
@@ -18,20 +19,19 @@ body{
 
 .sobre-capa{
     height: 100%;
-    /* background-color: #00000042; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
     font-size: 4rem;
-    /* font-family: "Edu AU VIC WA NT Pre", cursive; */
     font-weight: 700;
 }
 
 .img-sobre-mim {
-    width: 25%;
-    height: 300px;
+    width: 35%;
+    height: 400px;
+    border-radius: 1em;
 
 }
 
@@ -39,6 +39,16 @@ body{
     padding-top: 1rem;
     font-size: 3rem;
     text-align: center;
+}
+
+.subtitulo {
+    padding-top: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.paragrafo{
+    color: #356458;
 }
 
 .feed-container{
@@ -50,13 +60,20 @@ body{
 
 .infografico{
     display: flex;
-    height: 70%;
+    height: 100%;
     align-items: center;
     justify-content: space-around;
 }
 
+.area-grafico{
+    margin-top: 40px;
+}
+
 .graph{
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .titulo-historias{
@@ -77,10 +94,12 @@ body{
 .quadradinho{
     width: 30%;
     height: 100px;
-    border: 1px solid #000;
+    background-color: #fff;
+    border-bottom: 3px solid #000;
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .imagem-divisao {
@@ -91,8 +110,6 @@ body{
 
 .cabecalho {
     background: linear-gradient(97.54deg, #12b79e, #5bc1a6, #08ffda);
-    /* background-color: #5bc1a6;
-    border: 4px inset #12b79e; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -159,7 +176,6 @@ body{
     background-color: rgba(225, 228, 247, 0.473);
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     flex-direction: column;
     gap: 20px;
     
@@ -172,15 +188,36 @@ body{
     justify-content: center;
 }
 
+.minha-vida-primeiro{
+    display: flex;
+    margin: 5% 20%;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.minha-vida-apos{
+    display: flex;
+    margin: 5% 20%;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.lista-minha-vida{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .conteudo-principal-parte{
-    /* padding: 10px; */
     width: 100%;
     height: 200px;
 }
 
 .minha-historia{
     display: flex;
-    width: 80%;
 }
 
 .conteudo-lateral{
@@ -244,6 +281,17 @@ body{
     gap: 40px;
 }
 
+.publicacao {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    border-bottom: 3px solid #5fc4ab;
+    padding: 20px;
+  }
+
 .publicacao{
     width: 80%;
     background-color: #fff;
@@ -263,24 +311,46 @@ body{
 #div_erro {
     color: #ff0000;
     font-size: 14px;
+    font-weight: 500;
 }
 
 .login {
-    height: 85%;
+    height: 100%;
     display: flex;
     align-items:center;
-    justify-content: center;   
+    justify-content: center;  
+    margin: 5rem 0; 
+}
+
+select{
+    padding: 0.8rem;
+}
+
+.preencher-campo{
+    outline: none;
+    border-radius: 8px;
+    border: 3px solid #5fc4ab;
+    margin: 0.8rem 0;
+    height: 25px;
+    
 }
 
 .img-login{
     filter: drop-shadow(10px 10px 10px #066857);
 }
 
+/* .area-botao{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} */
+
 #card-login{
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 40%;
+    align-items: center;
 }
 
 .campo{
@@ -297,19 +367,30 @@ body{
 #valida-senha{
     font-family: 'Times New Roman', Times, serif;
     color: #000;
-    font-size: 10px;
+    font-size: 0.8rem;
     font-weight: lighter;
     list-style: disc;
     padding-top: 2px;
 }
 
 .botoes{
-    width: 80%;
+    width: 50%;
+    border-radius: 15px;
+    padding: 0.5rem 0;
+    background-color: #5fc4abc3;
+    color: #9e26a2;
+    font-weight: 900;
+}
+
+.botoes:hover{
+    background-color: #9e26a2c6;
+    color: #5fc4ab;
 }
 
 #card-cadastro{
     display: none;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     width: 40%;
 }

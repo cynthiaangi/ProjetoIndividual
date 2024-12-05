@@ -139,17 +139,17 @@ body {
 
 /* LOGIN */
 
-.login {
+/* .login {
   height: var(--tamanho-login);
   background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
   background-size: cover;
-}
+} */
 
-.login .container {
+/* .login .container {
   justify-content: center;
   align-items: center;
   height: 100%;
-}
+} */
 
 .card {
   width: 50%;

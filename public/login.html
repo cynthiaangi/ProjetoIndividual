@@ -30,39 +30,39 @@
         <img class="img-login" src="./assets/img/simbolo_colorido-removebg-preview.png" alt="Símbolo da conscientização da perda gestacional">
         <section id="card-login">
             <div class="campo">
-                e-mail: <input id="ipt_email_login" type="text" placeholder="Digite seu e-mail">
+                e-mail: <input class="preencher-campo" id="ipt_email_login" type="text" placeholder="Digite seu e-mail">
             </div>
             <div class="campo">
-                senha: <input id="ipt_senha_login" type="password" placeholder="Insira a sua senha">
+                senha: <input class="preencher-campo" id="ipt_senha_login" type="password" placeholder="Insira a sua senha">
             </div>
-
+            
             <button class="botoes" onclick="entrar()">Entrar</button>
             <button class="botoes" onclick="alterarMain()">Novo Usuário</button>
         </section>
         <section id="card-cadastro">
             <div id="div_erro"></div>
             <div class="campo">   
-                Nome:* <input id="ipt_nome" type="text" placeholder="Digite seu nome">
+                Nome:* <input class="preencher-campo" id="ipt_nome" type="text" placeholder="Digite seu nome">
             </div>
             <div class="campo">    
-                Data de Nascimento:* <input id="ipt_nasc" type="text" placeholder="DD/MM/AAAA">
+                Data de Nascimento:* <input class="preencher-campo" id="ipt_nasc" type="text" placeholder="DD/MM/AAAA">
             </div>
             <div class="campo">    
                 Gênero:* 
-               <select name="genero" id="sel_gen">
+               <select class="preencher-campo" name="genero" id="sel_gen">
                     <option value="#">Escolha uma opção</option>
                     <option value="feminino">Feminino</option>
                     <option value="masculino">Masculino</option>
                </select>
             </div>
             <div class="campo">    
-                E-mail:* <input id="ipt_email" type="text" placeholder="nome@provedor.com">
+                E-mail:* <input class="preencher-campo" id="ipt_email" type="text" placeholder="nome@provedor.com">
             </div>
             <div class="campo">    
-                Telefone:* <input id="ipt_tel" type="text" placeholder="(XX) 99999-9999">
+                Telefone:* <input class="preencher-campo" id="ipt_tel" type="text" placeholder="(XX) 99999-9999">
             </div>
             <div class="campo">      
-                Senha:* <input id="ipt_senha" type="password" placeholder="Informe uma senha">
+                Senha:* <input class="preencher-campo" id="ipt_senha" type="password" placeholder="Informe uma senha">
                 <div id="valida-senha">
                     <li>1 Letra Maiúscula</li>
                     <li>1 Letra Minúscula</li>
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="campo">     
-                Confirmação de senha:* <input id="ipt_conf" type="password" placeholder="Informe a senha novamente">
+                Confirmação de senha:* <input class="preencher-campo" id="ipt_conf" type="password" placeholder="Informe a senha novamente">
             </div>
 
                 <button class="botoes" onclick="cadastrar()">Cadastrar</button>

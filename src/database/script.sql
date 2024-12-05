@@ -46,6 +46,11 @@ SELECT idCadastro, nome, dtNasc, email, telefone, genero FROM cadastro WHERE ema
 
 select * from historia;
 
+update historia set autorizacao = 'sim'
+	where idHistoria = 5;
+
+SELECT count(repeticao) AS aborto FROM historia WHERE repeticao = 'Sim';
+
 select motivo from historia;
 
 select count(motivo) from historia where motivo = '';

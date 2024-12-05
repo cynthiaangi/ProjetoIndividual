@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/dashboards.css">
     <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style-usuario.css">
     <link rel="icon" href="../assets/img/logo.png">
     <title>Voz do Amor</title>
@@ -30,7 +31,7 @@
     <main class="conteudo">
         <section class="conteudo-principal">
             <div class="historias">
-                <h1>Suas histórias</h1>
+                <h1 class="subtitulo">Suas histórias</h1>
                 <div class="div-results">
                     <div id="historias_container" class="feed-container">
                     </div>
@@ -39,33 +40,33 @@
 
         </section>
         <section class="historia">
-            Conte sua história:
+            <h3 class="subtitulo">Conte sua história:</h3>
             <div class="form-historia" id="div_formulario">
                 <div class="campo">
                     Data do aborto:
-                    <input type="date" id="ipt_data">
+                    <input class="preencher-campo" type="date" id="ipt_data">
                 </div>
                 <div class="campo">
                     Tempo de gestação (em semanas):
-                    <input type="number" id="ipt_tempo">
+                    <input class="preencher-campo" type="number" id="ipt_tempo">
                 </div>
                 <div class="campo">
                     Motivo:
-                    <select name="motivo" id="sel_motivo">
+                    <select class="preencher-campo" name="motivo" id="sel_motivo">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Sem motivo determinado</option>
                         <option value="sim">Outro</option>
                     </select>
                     Qual:
-                    <input id="ipt_detalhe"></input>
+                    <input class="preencher-campo" id="ipt_detalhe">
                 </div>
                 <div class="campo">
                     Descrição:
-                    <input type="text" id="ipt_hist">
+                    <textarea class="preencher-campo" name="descricao" id="ipt_hist"></textarea>
                 </div>
                 <div class="campo">
                     Teve filhos após o aborto:
-                    <select name="gravidez" id="sel_nova_gravidez">
+                    <select class="preencher-campo" name="gravidez" id="sel_nova_gravidez">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
@@ -73,7 +74,7 @@
                 </div>
                 <div class="campo">
                     Aborto de repetição:
-                    <select name="aborto" id="sel_aborto">
+                    <select class="preencher-campo" name="aborto" id="sel_aborto">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
@@ -81,13 +82,13 @@
                 </div>
                 <div class="campo">
                     Autoriza a publicação da sua história na página para todos os usuários?
-                    <select name="atorizacao" id="sel_aut">
+                    <select class="preencher-campo" name="atorizacao" id="sel_aut">
                         <option value="#">Escolha uma opção</option>
                         <option value="sim">Sim</option>
                         <option value="nao">Não</option>
                     </select>
                 </div>
-                <button onclick="enviar()">Enviar</button>
+                <button class="botoes" onclick="enviar()">Enviar</button>
             </div>
         </section>
 
