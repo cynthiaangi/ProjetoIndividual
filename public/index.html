@@ -51,7 +51,9 @@
                     </div>
             </div>
         </section>
-        <section class="conteudo-lateral">
+        <button class="mostra" onclick="mostrar()" id="botao_mostrar">Mostrar</button>
+        <section class="conteudo-lateral" id="botao_esconder">
+            <button class="esconde" onclick="esconder()" >Esconder</button>
             <div class="conteudo-curiosidade">
                 <p>Você Sabia?</p>
                 <p>Futuras mamães:</p> 
@@ -71,6 +73,23 @@
 
 <script>
     window.onload = atualizarFeed();
+
+    function esconder(){
+        var esconder = document.getElementById('botao_esconder');
+        var mostrar = document.getElementById('botao_mostrar');
+
+        esconder.style.display = 'none';
+        mostrar.style.display = 'flex';
+    }
+
+    function mostrar(){
+        var esconder = document.getElementById('botao_esconder');
+        var mostrar = document.getElementById('botao_mostrar');
+
+        esconder.style.display = 'flex';
+        mostrar.style.display = 'none';
+    }
+    
     function atualizarFeed() {
         fetch("/avisos/listar").then(function (resposta) {
             if (resposta.ok) {
@@ -93,7 +112,6 @@
                         var dataFormatada = data.toLocaleDateString('pt-BR', {year: 'numeric', month: '2-digit', day: '2-digit'});
 
                         var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
                         var spanData = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var spanSemanas = document.createElement("span");
@@ -102,7 +120,6 @@
                         var spanRepeticao = document.createElement("span");
                         var divDescricao = document.createElement("div");
 
-                        spanID.innerHTML = 'ID: <b class="detalhe-historia">' + publicacao.idHistoria + "</b>";
                         spanNome.innerHTML = 'Nome: <b class="detalhe-historia">' + publicacao.nome + "</b>";
                         spanData.innerHTML = 'Data do Aborto: <b class="detalhe-historia">' + dataFormatada + "</b>";
                         spanSemanas.innerHTML = 'Tempo: <b class="detalhe-historia">' + publicacao.semanas + " semanas</b>";
@@ -112,7 +129,6 @@
                         divDescricao.innerHTML = 'Descrição: <b class="detalhe-historia">' + publicacao.descricao + "</b>";
 
                         divPublicacao.className = "publicacao";
-                        spanID.id = "inputNumero" + publicacao.idHistoria;
                         spanNome.className = "publicacao-nome";
                         spanData.className = "publicacao-titulo";
                         spanSemanas.className = "publicacao-semanas"
@@ -121,7 +137,6 @@
                         spanRepeticao.className = "publicacao-repeticao"
                         divDescricao.className = "publicacao-descricao";
 
-                        divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanData);
                         divPublicacao.appendChild(spanSemanas);

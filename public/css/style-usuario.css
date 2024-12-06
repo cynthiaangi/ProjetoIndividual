@@ -49,6 +49,13 @@ body{
     padding-bottom: 2rem;
 }
 
+.conteudo-historias{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
 .conteudo-principal{
     width: 100%;
     display: flex;
@@ -89,6 +96,14 @@ body{
     display: flex;
     flex-direction: column;
     width: 80%;
+}
+
+.kpis{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10rem;
+    margin-top: 3rem;
 }
 
 #ipt_hist{

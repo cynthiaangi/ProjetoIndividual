@@ -197,9 +197,6 @@ body {
   font-size: 20px;
 }
 
-.card-aquario h1 {
-  width: fit-content;
-}
 
 .card-aquario p {
   margin: 0;
@@ -221,15 +218,6 @@ body {
 
 .title-aquario {
   width: 100%;
-}
-
-
-.cards h1 {
-  font-size: 22px;
-  border-bottom: solid white 1px;
-  text-align: left;
-  font-weight: lighter;
-  margin: 20px;
 }
 
 .temperatura,
@@ -349,10 +337,6 @@ canvas {
   left: 25%;
   height: 100vh;
   overflow: auto;
-}
-
-.header-left h1 {
-  color: #32b9cd;
 }
 
 .hello {

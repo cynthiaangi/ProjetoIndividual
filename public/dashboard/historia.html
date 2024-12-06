@@ -28,7 +28,7 @@
             <a href="../login.html">Logout</a>
         </nav>
     </header>
-    <main class="conteudo">
+    <main class="conteudo-historias">
         <section class="conteudo-principal">
             <div class="historias">
                 <h1 class="subtitulo">Algumas histórias</h1>
@@ -132,7 +132,6 @@
                         var dataFormatada = data.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
                         var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
                         var spanData = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var spanSemanas = document.createElement("span");
@@ -141,17 +140,15 @@
                         var spanRepeticao = document.createElement("span");
                         var divDescricao = document.createElement("div");
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idHistoria + "</b>";
-                        spanNome.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
-                        spanData.innerHTML = "Data do Aborto: <b>" + dataFormatada + "</b>";
-                        spanSemanas.innerHTML = "Tempo: <b>" + publicacao.semanas + " semanas</b>";
-                        spanMotivo.innerHTML = "Causa: <b>" + publicacao.motivo + "</b>";
-                        spanFilhos.innerHTML = "Filhos após perda: <b>" + publicacao.filhos + "</b>";
-                        spanRepeticao.innerHTML = "Aborto de repetição: <b>" + publicacao.repeticao + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        spanNome.innerHTML = 'Nome: <b class="detalhe-historia">' + publicacao.nome + "</b>";
+                        spanData.innerHTML = 'Data do Aborto: <b class="detalhe-historia">' + dataFormatada + "</b>";
+                        spanSemanas.innerHTML = 'Tempo: <b class="detalhe-historia">' + publicacao.semanas + " semanas</b>";
+                        spanMotivo.innerHTML = 'Causa: <b class="detalhe-historia">' + publicacao.motivo + "</b>";
+                        spanFilhos.innerHTML = 'Filhos após perda: <b class="detalhe-historia">' + publicacao.filhos + "</b>";
+                        spanRepeticao.innerHTML = 'Aborto de repetição: <b class="detalhe-historia">' + publicacao.repeticao + "</b>";
+                        divDescricao.innerHTML = 'Descrição: <b class="detalhe-historia">' + publicacao.descricao + "</b>";
 
                         divPublicacao.className = "publicacao";
-                        spanID.id = "inputNumero" + publicacao.idHistoria;
                         spanNome.className = "publicacao-nome";
                         spanData.className = "publicacao-titulo";
                         spanSemanas.className = "publicacao-semanas"
@@ -160,7 +157,6 @@
                         spanRepeticao.className = "publicacao-repeticao"
                         divDescricao.className = "publicacao-descricao";
 
-                        divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanData);
                         divPublicacao.appendChild(spanSemanas);

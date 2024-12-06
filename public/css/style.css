@@ -95,11 +95,17 @@ body{
     width: 30%;
     height: 100px;
     background-color: #fff;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #5fc4ab;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 1rem;
     border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.quadradinho-texto{
+    font-size: 1.7rem;
 }
 
 .imagem-divisao {
@@ -115,7 +121,7 @@ body{
     width: 100%;
     height: 70px;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .cabecalho-titulo{
@@ -226,7 +232,7 @@ body{
     width: 20%;
     display: flex;
     position: fixed;
-    top: 60%;
+    top: 50%;
     left: 80%;
     flex-direction: column;
     align-items: center;
@@ -234,6 +240,33 @@ body{
     gap: 20px;
     border: 2px ridge #9e26a2;
     box-shadow: -10px 10px 5px #12b79e;
+}
+
+.esconde{
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    color: #4b0082;
+    font-weight: 900;
+}
+
+.mostra{
+    padding: 20px 0;
+    background-color: rgba(227, 207, 241, 0.4);
+    width: 20%;
+    display: none;
+    position: fixed;
+    top: 90%;
+    left: 80%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border: 2px ridge #9e26a2;
+    box-shadow: -10px 10px 5px #12b79e;
+    font-size: 1rem;
+    color: #4b0082;
+    font-weight: 900;
 }
 
 .conteudo-curiosidade{
@@ -289,15 +322,13 @@ body{
     justify-content: center;
     align-items: stretch;
     border-bottom: 3px solid #5fc4ab;
-    padding: 20px;
-  }
-
-.publicacao{
+    margin-bottom: 1rem;
     width: 80%;
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
-}
+  }
+
 
 .rodape{
     background: linear-gradient(97.54deg, #12b79e, #5bc1a6, #08ffda);

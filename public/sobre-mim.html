@@ -61,7 +61,9 @@
 
 
         </section>
-        <section class="conteudo-lateral">
+        <button class="mostra" onclick="mostrar()" id="botao_mostrar">Mostrar</button>
+        <section class="conteudo-lateral" id="botao_esconder">
+            <button class="esconde" onclick="esconder()" >Esconder</button>
             <div class="conteudo-curiosidade">
                 <p>Você Sabia?</p>
                 <p>Futuras mamães:</p> 
@@ -79,3 +81,20 @@
 </body>
 </html>
 
+<script>
+    function esconder(){
+        var esconder = document.getElementById('botao_esconder');
+        var mostrar = document.getElementById('botao_mostrar');
+
+        esconder.style.display = 'none';
+        mostrar.style.display = 'flex';
+    }
+
+    function mostrar(){
+        var esconder = document.getElementById('botao_esconder');
+        var mostrar = document.getElementById('botao_mostrar');
+
+        esconder.style.display = 'flex';
+        mostrar.style.display = 'none';
+    }
+</script>
