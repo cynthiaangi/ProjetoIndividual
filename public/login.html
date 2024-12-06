@@ -29,6 +29,7 @@
     <main class="login">
         <img class="img-login" src="./assets/img/simbolo_colorido-removebg-preview.png" alt="Símbolo da conscientização da perda gestacional">
         <section id="card-login">
+            <div id="div_mensagem"></div>
             <div class="campo">
                 e-mail: <input class="preencher-campo" id="ipt_email_login" type="text" placeholder="Digite seu e-mail">
             </div>
@@ -49,7 +50,7 @@
             </div>
             <div class="campo">    
                 Gênero:* 
-               <select class="preencher-campo" name="genero" id="sel_gen">
+               <select name="genero" id="sel_gen">
                     <option value="#">Escolha uma opção</option>
                     <option value="feminino">Feminino</option>
                     <option value="masculino">Masculino</option>
@@ -118,15 +119,13 @@
     function entrar(){
         var email = ipt_email_login.value;
         var senha = ipt_senha_login.value;
+        var mensagem = document.getElementById("div_mensagem")
+
 
         if (email == "" || senha == "") {
-            alert("(Mensagem de erro para todos os campos em branco)");
-            // finalizarAguardar();
+            mensagem.innerHTML = "Preencha seu login e senha para entrar";
             return false;
-        }
-        // else {
-        //     // setInterval(sumirMensagem, 5000)
-        // }
+        } 
 
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", senha);
@@ -149,14 +148,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    // sessionStorage.CPF_USUARIO = json.cpf;
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
                         window.location = "./dashboard/usuario.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 5000); // apenas para exibir o loading
 
                 });
 
@@ -178,7 +176,8 @@
     }
 
     function cadastrar(){
-        div_erro.innerHTML = '';
+        var mensagem = document.getElementById("div_erro");
+        mensagem.innerHTML = '';
         var nome = ipt_nome.value;
         var dtNasc = ipt_nasc.value;
         var gen = sel_gen.value;
@@ -199,7 +198,7 @@
         var dia = 0;
 
         if (nome == '' || dtNasc == '' || gen == '#' || email == '' || senha == '' || conf == ''){
-            div_erro.innerHTML = `<p>Todos os campos com (*) devem estar preenchidos!</p><p>Tente novamente.</p>`;
+            mensagem.innerHTML = `<p>Todos os campos com (*) devem estar preenchidos!</p><p>Tente novamente.</p>`;
         } else{
             for(var i = 0; i < dtNasc.length; i++){
                 if(i == 2 || i == 5){
@@ -210,7 +209,7 @@
                 }
             } 
             if(dtNasc.length != 10 || dtNasc == false){
-                div_erro.innerHTML = `<p>Formato de data inválido!</p><p>Tente novamente.</p>`;
+                mensagem.innerHTML = `<p>Formato de data inválido!</p><p>Tente novamente.</p>`;
             } else{
                 for(var j = 0; j < tel.length; j++){
                     if(j == 0){
@@ -233,13 +232,14 @@
                     }
                 }
                 if(tel.length != 14 || tel == false){
-                    div_erro.innerHTML = `<p>Número de telefone formato inválido!</p><p>Tente novamente.</p>`;
+                    mensagem.innerHTML = `<p>Número de telefone formato inválido!</p><p>Tente novamente.</p>`;
                 }else if (nome.length < 3){
-                    div_erro.innerHTML = `<p>O nome precisa conter pelo menos 3 letras!</p><p>Tente novamente.</p>`;
+                    mensagem.innerHTML = `<p>O nome precisa conter pelo menos 3 letras!</p><p>Tente novamente.</p>`;
                 } else if(gen != 'feminino'){
-                    div_erro.innerHTML = `<p>Infelizmente você não pode se cadastrar em nosso grupo de apoio.</p><p>Agradecemos o interesse!</p>`;
+                    console.log('nao é mulher')
+                    mensagem.innerHTML = `<p>Infelizmente você não pode se cadastrar em nosso grupo de apoio.</p><p>Agradecemos o interesse!</p>`;
                 } else if(pontoCom < arroba || arroba == -1 || pontoCom == -1){
-                    div_erro.innerHTML = `<p>Formato de email inválido!</p><p>Tente novamente.</p>`;
+                    mensagem.innerHTML = `<p>Formato de email inválido!</p><p>Tente novamente.</p>`;
                 }  else  {
                     for(var k = 0; k < senha.length; k++){
                         if(Number(senha[k]) != NaN){
@@ -254,9 +254,9 @@
                         }
                     }
                     if(senhaOk != 2 || senha == senhaMaiusc || senha == senhaMinusc || senha.length < 8){
-                        div_erro.innerHTML = `<p>A senha precisa conter todos os itens listados abaixo do campo!</p><p>Tente novamente.</p>`;
+                        mensagem.innerHTML = `<p>A senha precisa conter todos os itens listados abaixo do campo!</p><p>Tente novamente.</p>`;
                     } else if(conf != senha){
-                        div_erro.innerHTML = `<p>A confirmação da senha está diferente da senha informada!</p><p>Tente novamente.</p>`;
+                        mensagem.innerHTML = `<p>A confirmação da senha está diferente da senha informada!</p><p>Tente novamente.</p>`;
                     }else{
                         for(var y = 0; y < dtNasc.length; y++){
                             if(y < 2){
@@ -271,54 +271,54 @@
                         }
                         dtNasc = `${ano}-${mes}-${dia}`;
                         alert('Cadastro realizado com sucesso, retornando para a tela de login');            
+                        fetch("/login/cadastrar", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            // crie um atributo que recebe o valor recuperado aqui
+                            // Agora vá para o arquivo routes/usuario.js
+                            nomeServer: nome,
+                            dtNascServer: dtNasc,
+                            emailServer: email,
+                            telefoneServer: tel,
+                            generoServer: gen,
+                            senhaServer: senha,
+                    
+                          }),
+                        })
+                          .then(function (resposta) {
+                            console.log("resposta: ", resposta);
+                    
+                            if (resposta.ok) {
+                              cardErro.style.display = "block";
+                    
+                              mensagem_erro.innerHTML =
+                                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                    
+                              setTimeout(() => {
+                                window.location = "login.html";
+                              }, "2000");
+                    
+                              limparFormulario();
+                            //   finalizarAguardar();
+                            } else {
+                              throw "Houve um erro ao tentar realizar o cadastro!";
+                            }
+                          })
+                          .catch(function (resposta) {
+                            console.log(`#ERRO: ${resposta}`);
+                            // finalizarAguardar();
+                          });
+                    
                         voltar();
+                        return false;
                     }
                 }
             }
         }
         // Enviando o valor da nova input
-    fetch("/login/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nome,
-        dtNascServer: dtNasc,
-        emailServer: email,
-        telefoneServer: tel,
-        generoServer: gen,
-        senhaServer: senha,
-
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-        //   finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
-      });
-
-    return false;
   }
 
   // Listando empresas cadastradas 

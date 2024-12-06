@@ -353,28 +353,29 @@ body{
     margin: 5rem 0; 
 }
 
-select{
-    padding: 0.8rem;
-}
 
 .preencher-campo{
     outline: none;
     border-radius: 8px;
     border: 3px solid #5fc4ab;
     margin: 0.8rem 0;
-    height: 25px;
-    
+    height: 25px;    
+}
+
+select{
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    background-color: white; /* Adiciona fundo branco para destaque */
+    border-radius: 8px;
+    border: 3px solid #5fc4ab;
+    outline: none;
+    margin: 0.8rem 0;
+    height: 45px; /* Ajusta altura para ser consistente */
 }
 
 .img-login{
     filter: drop-shadow(10px 10px 10px #066857);
 }
-
-/* .area-botao{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-} */
 
 #card-login{
     display: flex;
@@ -422,6 +423,6 @@ select{
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     width: 40%;
 }

@@ -31,6 +31,7 @@
     <main class="conteudo">
         <section class="conteudo-principal">
             <div class="historias">
+                <h1 class="subtitulo">Bem-vinda, <span id="id_nome"></span>!</h1>
                 <h1 class="subtitulo">Suas histórias</h1>
                 <div class="div-results">
                     <div id="historias_container" class="feed-container">
@@ -52,7 +53,7 @@
                 </div>
                 <div class="campo">
                     Motivo:
-                    <select class="preencher-campo" name="motivo" id="sel_motivo">
+                    <select name="motivo" id="sel_motivo">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Sem motivo determinado</option>
                         <option value="sim">Outro</option>
@@ -66,7 +67,7 @@
                 </div>
                 <div class="campo">
                     Teve filhos após o aborto:
-                    <select class="preencher-campo" name="gravidez" id="sel_nova_gravidez">
+                    <select name="gravidez" id="sel_nova_gravidez">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
@@ -74,7 +75,7 @@
                 </div>
                 <div class="campo">
                     Aborto de repetição:
-                    <select class="preencher-campo" name="aborto" id="sel_aborto">
+                    <select name="aborto" id="sel_aborto">
                         <option value="#">Escolha uma opção</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
@@ -82,7 +83,7 @@
                 </div>
                 <div class="campo">
                     Autoriza a publicação da sua história na página para todos os usuários?
-                    <select class="preencher-campo" name="atorizacao" id="sel_aut">
+                    <select name="atorizacao" id="sel_aut">
                         <option value="#">Escolha uma opção</option>
                         <option value="sim">Sim</option>
                         <option value="nao">Não</option>
@@ -164,6 +165,9 @@
 
     function atualizarHistorias() {
         var idUsuario = sessionStorage.ID_USUARIO
+        var nomeUser = sessionStorage.NOME_USUARIO
+        var bemVinda = document.getElementById("id_nome")
+        bemVinda.innerHTML = `${nomeUser}`;
         fetch("/avisos/listar/:idUsuario").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
